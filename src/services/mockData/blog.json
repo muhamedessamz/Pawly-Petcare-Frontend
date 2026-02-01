@@ -1,62 +1,32 @@
 [
     {
         "id": 1,
-        "title": "10 Essential Tips for Puppy Training",
-        "excerpt": "Starting your journey with a new puppy? Here are the must-know tips for a happy, well-behaved companion.",
-        "author": "Dr. Sarah Mitchell",
-        "date": "May 15, 2026",
-        "category": "Training",
-        "image": "https://images.unsplash.com/photo-1541364983171-a8ba01d95cfc?auto=format&fit=crop&q=80&w=800",
-        "content": "Puppy training is a journey of patience and consistency. The first few months are crucial for setting the foundation of a life-long bond..."
+        "title": "5 Signs Your Pet Needs Urgent Care",
+        "excerpt": "Learn how to spot the subtle warning signs that your furry friend might need immediate veterinary attention.",
+        "content": "Our pets can't tell us when something is wrong, so it's up to us to notice the signs. In this guide, Dr. Hamilton breaks down the 5 critical symptoms you should never ignore...\n\n1. Difficulty Breathing: If your pet is panting without exercise or struggling for breath, this is an emergency.\n2. Seizures: Any seizure activity requires immediate vet care.\n3. Sudden Collapse: Even if they recover quickly, this could indicate heart issues.\n4. Vomiting/Diarrhea: If persistent for more than 24 hours or containing blood.\n5. Difficulty Urinating: Especially in male cats, this is life-threatening.\n\nAlways err on the side of caution. If you are unsure, call our 24/7 triage line immediately.",
+        "author": "Dr. Richard Hamilton",
+        "date": "Oct 12, 2025",
+        "image": "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&q=80&w=800",
+        "category": "Health Health"
     },
     {
         "id": 2,
-        "title": "Understanding Your Cat's Body Language",
-        "excerpt": "Is your cat happy, or just hungry? Learn to decode the subtle signals your feline friend is sending.",
-        "author": "Dr. James Wilson",
-        "date": "May 12, 2026",
-        "category": "Behavior",
-        "image": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=800",
-        "content": "Cats are masters of non-verbal communication. From the twitch of a tail to the dilation of pupils, every movement tells a story..."
+        "title": "Nutrition 101: The Raw Food Debate",
+        "excerpt": "Is a raw diet right for your dog? We explore the benefits, risks, and scientific consensus behind this growing trend.",
+        "content": "The raw food diet (BARF) has gained massive popularity, but is it safe? \n\n**The Benefits:**\nProponents argue it leads to shinier coats, healthier skin, and higher energy levels.\n\n**The Risks:**\nBacterial contamination (Salmonella, E. coli) is a real risk for both pets and owners. Nutritional imbalance is also common if not carefully formulated.\n\n**Our Verdict:**\nConsult with a veterinary nutritionist before switching. We offer personalized diet plans that can safely incorporate fresh foods.",
+        "author": "Dr. Isabella Rossi",
+        "date": "Oct 10, 2025",
+        "image": "https://images.unsplash.com/photo-1589924691195-41432c84c161?auto=format&fit=crop&q=80&w=800",
+        "category": "Nutrition"
     },
     {
         "id": 3,
-        "title": "The Best Diet for Senior Dogs",
-        "excerpt": "As your dog ages, their nutritional needs change. Discover the best foods to keep them healthy in their golden years.",
-        "author": "Dr. Elena Rodriguez",
-        "date": "May 10, 2026",
-        "category": "Nutrition",
-        "image": "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=800",
-        "content": "Senior dogs require fewer calories but more specific nutrients. Glucosamine and Chondroitin become essential for joint health..."
-    },
-    {
-        "id": 4,
-        "title": "5 Signs Your Pet Needs a Vet Visit",
-        "excerpt": "Often, pets hide their pain. Learn the subtle behavioral changes that indicate something might be wrong.",
-        "author": "Dr. Sarah Mitchell",
-        "date": "May 08, 2026",
-        "category": "Health",
-        "image": "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&q=80&w=800",
-        "content": "Pets are instinctually programmed to hide illness. Look for changes in appetite, grooming habits, and energy levels..."
-    },
-    {
-        "id": 5,
-        "title": "Apartment Living with a Large Dog",
-        "excerpt": "Think you can't have a big dog in a small space? Think again. Here's how to make it work for both of you.",
-        "author": "James Thorne",
-        "date": "May 05, 2026",
-        "category": "Lifestyle",
-        "image": "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=800",
-        "content": "Living in an apartment with a large breed requires a strict routine. Frequent exercise and mental stimulation are key..."
-    },
-    {
-        "id": 6,
-        "title": "The Science of Pet Happiness",
-        "excerpt": "What actually makes our pets happy? We dive into the psychology of pet enrichment and well-being.",
-        "author": "Dr. Elena Rodriguez",
-        "date": "May 01, 2026",
-        "category": "Research",
-        "image": "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&q=80&w=800",
-        "content": "Enrichment is not just about toys. It's about sensory engagement, social interaction, and problem-solving opportunities..."
+        "title": "Puppy Socialization: The Critical Window",
+        "excerpt": "Why the first 16 weeks of your puppy's life define their future behavior and how to make the most of it.",
+        "content": "Between 3 and 16 weeks of age, your puppy is in their critical socialization period. What they experience now shapes how they view the world forever.\n\n**Checklist:**\n- Meet 100 new people (safely)\n- Walk on different surfaces (grass, concrete, wood)\n- Hear different sounds (traffic, vacuum, doorbell)\n\nDon't wait until they are fully vaccinated to start *safe* socialization. Carry them or use a stroller!",
+        "author": "Pawly Team",
+        "date": "Oct 08, 2025",
+        "image": "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=800",
+        "category": "Training"
     }
 ]

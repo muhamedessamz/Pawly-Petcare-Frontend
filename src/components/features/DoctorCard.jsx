@@ -14,7 +14,8 @@ const DoctorCard = ({ doctor }) => {
                         <img
                             src={doctor.image}
                             alt={doctor.name}
-                            className="object-cover w-full h-full scale-110 group-hover:scale-100 transition-transform duration-700"
+                            className="object-cover object-top w-full h-full scale-110 group-hover:scale-100 transition-transform duration-700"
+                            style={doctor.imageStyles}
                         />
                     </div>
                     <div className="absolute -bottom-2 -right-2 bg-health text-white p-2 rounded-xl shadow-lg ring-4 ring-white">

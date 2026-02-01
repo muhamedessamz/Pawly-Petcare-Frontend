@@ -23,6 +23,7 @@ import AdminLayout from './components/layout/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import ProductsAdmin from './pages/admin/ProductsAdmin';
 import DoctorsAdmin from './pages/admin/DoctorsAdmin';
+import BlogAdmin from './pages/admin/BlogAdmin';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route index element={<AdminDashboard />} />
         <Route path="products" element={<ProductsAdmin />} />
         <Route path="doctors" element={<DoctorsAdmin />} />
+        <Route path="blog" element={<BlogAdmin />} />
       </Route>
     </Routes>
   );

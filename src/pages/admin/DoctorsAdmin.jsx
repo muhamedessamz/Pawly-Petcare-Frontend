@@ -60,7 +60,7 @@ const DoctorsAdmin = () => {
 
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="h-16 w-16 rounded-2xl overflow-hidden bg-gray-100">
-                                    <img src={doctor.image} alt={doctor.name} className="w-full h-full object-cover" />
+                                    <img src={doctor.image} alt={doctor.name} className="w-full h-full object-cover object-top" />
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-lg text-gray-900">{doctor.name}</h3>

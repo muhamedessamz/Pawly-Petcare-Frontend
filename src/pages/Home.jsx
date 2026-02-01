@@ -5,8 +5,10 @@ import ProductCard from '../components/features/ProductCard';
 import DoctorCard from '../components/features/DoctorCard';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
-import Card from '../components/ui/Card';
+import { Card } from '../components/ui/Card';
 import { ArrowRight, ShieldCheck, Truck, HeartPulse, Sparkles, Star, Calendar, Quote, Store } from 'lucide-react';
+import doctorsData from '../services/mockData/doctors.json';
+import staticBlogData from '../services/mockData/blog.json';
 
 const Home = () => {
     const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -17,14 +19,14 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [products, doctors, blog] = await Promise.all([
+                const [products, blog] = await Promise.all([
                     api.products.getAll(),
-                    api.doctors.getAll(),
-                    api.blog.getAll(),
+                    api.blog.getAll().catch(() => []), // Fallback if backend empty/fails
                 ]);
                 setFeaturedProducts(products.slice(0, 4));
-                setFeaturedDoctors(doctors.slice(0, 2));
-                setLatestArticles(blog.slice(0, 3));
+                setFeaturedDoctors(doctorsData.filter(d => d.id !== 0).slice(0, 4));
+                // Merge static data with backend data (Static first)
+                setLatestArticles([...staticBlogData, ...blog].slice(0, 3));
             } catch (error) {
                 console.error('Failed to fetch data', error);
             } finally {
@@ -279,6 +281,55 @@ const Home = () => {
                                         <p className="text-gray-500 font-bold uppercase text-xs tracking-widest">Happiness</p>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Founder Note Section */}
+            <section className="px-4 py-20 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-full bg-health/5 skew-y-3 transform origin-top-left -z-10 bg-opacity-30"></div>
+                <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+                    <div className="w-full md:w-1/3 relative">
+                        <div className="aspect-[3/4] rounded-[3rem] overflow-hidden shadow-2xl shadow-health/20 rotate-3 border-4 border-white">
+                            <img
+                                src="https://img.freepik.com/free-photo/close-up-health-worker_23-2149112506.jpg?t=st=1769968108~exp=1769971708~hmac=776163d86f26ae815d19154eb6dbe230a0e53b173b9720bffdc9e4a243b970a1"
+                                alt="Dr. Richard Hamilton"
+                                className="w-full h-full object-cover object-top"
+                            />
+                        </div>
+                        <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-3xl shadow-xl flex flex-col items-center border border-gray-100 animate-bounce-slow">
+                            <div className="text-3xl font-black text-health mb-1">20+</div>
+                            <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">Years Exp.</div>
+                        </div>
+                    </div>
+
+                    <div className="w-full md:w-2/3">
+                        <Badge variant="playful" className="bg-health text-white border-none mb-6">Meet the Founder</Badge>
+                        <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-8 leading-tight">
+                            "Veterinary care isn't just a job.<br />
+                            <span className="text-health">It's a lifelong promise.</span>"
+                        </h2>
+                        <div className="space-y-6 text-xl text-gray-600 font-medium leading-relaxed">
+                            <p>
+                                When I started Pawly, I had one simple mission: to create a place where medical excellence meets genuine compassion.
+                                We're not just treating symptoms; we're nurturing the bond between you and your family member.
+                            </p>
+                            <p>
+                                Every specialist on our team has been handpicked not just for their credentials, but for their heart.
+                                We treat your pet exactly the same way we treat our own—with patience, respect, and infinite love.
+                            </p>
+                        </div>
+
+                        <div className="mt-12 flex items-center gap-8">
+                            <div className="font-english-script text-4xl text-gray-900 transform -rotate-3 select-none" style={{ fontFamily: 'Brush Script MT, cursive' }}>
+                                Richard Hamilton
+                            </div>
+                            <div className="h-10 w-px bg-gray-200"></div>
+                            <div>
+                                <p className="font-bold text-gray-900 text-lg">Dr. Richard Hamilton</p>
+                                <p className="text-health font-bold text-sm uppercase tracking-wider">Chief Medical Officer</p>
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Package, Stethoscope, Users, Settings, LogOut } from 'lucide-react';
+import { LayoutDashboard, Package, Stethoscope, Users, Settings, LogOut, BookOpen } from 'lucide-react';
 
 const AdminLayout = () => {
     const location = useLocation();
@@ -24,19 +24,23 @@ const AdminLayout = () => {
 
                 <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
                     <p className="px-4 text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 mt-4">Overview</p>
-                    
+
                     <Link to="/admin" className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-colors ${isActive('/admin')}`}>
                         <LayoutDashboard size={20} /> Dashboard
                     </Link>
 
                     <p className="px-4 text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 mt-6">Management</p>
-                    
+
                     <Link to="/admin/products" className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-colors ${isActive('/admin/products')}`}>
                         <Package size={20} /> Products
                     </Link>
-                    
+
                     <Link to="/admin/doctors" className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-colors ${isActive('/admin/doctors')}`}>
                         <Stethoscope size={20} /> Doctors
+                    </Link>
+
+                    <Link to="/admin/blog" className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-colors ${isActive('/admin/blog')}`}>
+                        <BookOpen size={20} /> Blog & Articles
                     </Link>
 
                     <Link to="/admin/users" className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-colors ${isActive('/admin/users')}`}>
@@ -44,7 +48,7 @@ const AdminLayout = () => {
                     </Link>
 
                     <p className="px-4 text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 mt-6">Settings</p>
-                    
+
                     <Link to="/admin/settings" className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-colors ${isActive('/admin/settings')}`}>
                         <Settings size={20} /> Settings
                     </Link>

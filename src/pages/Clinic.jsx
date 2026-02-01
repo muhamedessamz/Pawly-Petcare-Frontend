@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { api } from '../services/api';
 import DoctorCard from '../components/features/DoctorCard';
 import Input from '../components/ui/Input';
 import { Search, Stethoscope, MapPin, Sparkles, Filter, ArrowRight } from 'lucide-react';
+import doctorsData from '../services/mockData/doctors.json';
 import Button from '../components/ui/Button';
+
+
 
 const Clinic = () => {
     const [doctors, setDoctors] = useState([]);
@@ -15,11 +17,12 @@ const Clinic = () => {
     useEffect(() => {
         const fetchDoctors = async () => {
             try {
-                const data = await api.doctors.getAll();
-                setDoctors(data);
-                setFilteredDoctors(data);
+                // Simulate loading delay for better UX
+                await new Promise(resolve => setTimeout(resolve, 800));
+                setDoctors(doctorsData);
+                setFilteredDoctors(doctorsData);
             } catch (error) {
-                console.error('Failed to fetch doctors', error);
+                console.error('Error loading doctors:', error);
             } finally {
                 setLoading(false);
             }
@@ -49,7 +52,11 @@ const Clinic = () => {
             <section className="bg-white py-16 md:py-24 border-b border-gray-100 overflow-hidden relative">
                 <div className="max-w-7xl mx-auto px-4 relative z-10">
                     <div className="absolute top-0 right-0 p-8 opacity-10 hidden lg:block">
-                        <Stethoscope size={200} className="text-health" />
+                        <img
+                            src="https://img.icons8.com/?size=100&id=43344&format=png&color=000000"
+                            alt="Dog Icon"
+                            className="w-[250px] h-[250px] object-contain opacity-50"
+                        />
                     </div>
 
                     <div className="max-w-2xl">
