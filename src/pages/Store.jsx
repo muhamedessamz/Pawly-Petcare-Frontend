@@ -41,7 +41,7 @@ const Store = () => {
         setFilteredProducts(result);
     }, [searchTerm, selectedCategory, products]);
 
-    const categories = ['All', ...new Set(products.map(p => p.category))];
+    const categories = ['All', 'Food', 'Accessories', 'Houses', 'Toys', 'Healthcare', 'Grooming'];
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-12 space-y-12">
@@ -51,7 +51,7 @@ const Store = () => {
                         <Package size={20} /> <span className="uppercase tracking-widest text-xs">Pet Marketplace</span>
                     </div>
                     <h1 className="text-4xl font-black text-gray-900 mb-2">The Pawly Shop</h1>
-                    <p className="text-gray-500 font-medium italic">Premium nutrition and toys for your best friends.</p>
+                    <p className="text-gray-600 font-semibold italic">Premium nutrition and toys for your best friends.</p>
                 </div>
 
                 <div className="relative w-full md:w-96 group">
@@ -74,7 +74,7 @@ const Store = () => {
                         </div>
 
                         <div className="space-y-2">
-                            <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                            <p className="text-xs font-black text-gray-500 uppercase tracking-widest mb-4 flex items-center gap-2">
                                 <Tag size={12} /> Category
                             </p>
                             <div className="flex flex-wrap lg:flex-col gap-2">
@@ -84,7 +84,7 @@ const Store = () => {
                                         onClick={() => setSelectedCategory(cat)}
                                         className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 text-left ${selectedCategory === cat
                                             ? 'bg-primary text-white shadow-lg shadow-primary/20 scale-[1.02]'
-                                            : 'bg-gray-50 text-gray-500 hover:bg-gray-100 hover:text-gray-900'
+                                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900'
                                             }`}
                                     >
                                         {cat}

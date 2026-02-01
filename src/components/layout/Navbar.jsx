@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingCart, User, Stethoscope, Store, Home, Menu, X, Heart, Activity } from 'lucide-react';
+import { ShoppingCart, User, Stethoscope, Store, Home, Menu, X, Heart, Activity, PawPrint } from 'lucide-react';
 import Button from '../ui/Button';
 import { cn } from '../../utils/cn';
 import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
 
 const Navbar = () => {
     const { cartCount } = useCart();
+    const { user, logout } = useAuth();
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const location = useLocation();
 
@@ -26,9 +28,9 @@ const Navbar = () => {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-20 justify-between items-center">
                     <div className="flex items-center gap-12">
-                        <Link to="/" className="flex items-center gap-2">
-                            <div className="h-10 w-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/30">
-                                <Heart size={24} fill="currentColor" />
+                        <Link to="/" className="flex items-center gap-2 group">
+                            <div className="h-10 w-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                                <PawPrint size={24} strokeWidth={2.5} />
                             </div>
                             <span className="text-2xl font-black tracking-tight flex items-baseline">
                                 <span className="text-gray-900">Pawly</span>
@@ -66,11 +68,26 @@ const Navbar = () => {
                             </Button>
                         </Link>
                         <div className="h-6 w-px bg-gray-100 mx-2"></div>
-                        <Link to="/login">
-                            <Button variant="primary" size="sm" className="rounded-xl shadow-lg shadow-primary/20">
-                                Sign In
-                            </Button>
-                        </Link>
+                        <div className="h-6 w-px bg-gray-100 mx-2"></div>
+
+                        {user ? (
+                            <div className="flex items-center gap-3">
+                                <Link to="/profile">
+                                    <Button variant="ghost" size="sm" className="gap-2 font-bold text-gray-700">
+                                        <User size={18} /> Account
+                                    </Button>
+                                </Link>
+                                <Button onClick={logout} variant="outline" size="sm" className="rounded-xl border-gray-200 text-xs">
+                                    Sign Out
+                                </Button>
+                            </div>
+                        ) : (
+                            <Link to="/login">
+                                <Button variant="primary" size="sm" className="rounded-xl shadow-lg shadow-primary/20">
+                                    Sign In
+                                </Button>
+                            </Link>
+                        )}
                     </div>
 
                     <div className="flex lg:hidden">
@@ -106,11 +123,24 @@ const Navbar = () => {
                                 <ShoppingCart size={20} /> My Cart
                             </Button>
                         </Link>
-                        <Link to="/login" onClick={() => setIsMenuOpen(false)}>
-                            <Button variant="primary" className="w-full shadow-lg shadow-primary/20">
-                                Sign In
-                            </Button>
-                        </Link>
+                        {user ? (
+                            <>
+                                <Link to="/profile" onClick={() => setIsMenuOpen(false)}>
+                                    <Button variant="ghost" className="w-full justify-start gap-3">
+                                        <User size={20} /> My Profile
+                                    </Button>
+                                </Link>
+                                <Button onClick={() => { logout(); setIsMenuOpen(false); }} variant="outline" className="w-full justify-start gap-3 text-red-500 hover:text-red-600 hover:bg-red-50 border-red-100">
+                                    Sign Out
+                                </Button>
+                            </>
+                        ) : (
+                            <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                                <Button variant="primary" className="w-full shadow-lg shadow-primary/20">
+                                    Sign In
+                                </Button>
+                            </Link>
+                        )}
                     </div>
                 </div>
             )}

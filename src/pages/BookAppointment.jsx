@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { api } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/Card';
@@ -9,6 +10,7 @@ import { Calendar, User, Info, CheckCircle2, ArrowLeft, Clock } from 'lucide-rea
 const BookAppointment = () => {
     const { doctorId } = useParams();
     const navigate = useNavigate();
+    const { user } = useAuth();
     const [doctor, setDoctor] = useState(null);
     const [formData, setFormData] = useState({
         ownerName: '',
@@ -29,13 +31,32 @@ const BookAppointment = () => {
         }
     }, [doctorId]);
 
-    const handleSubmit = (e) => {
+    useEffect(() => {
+        if (!user) {
+            navigate('/login');
+        }
+    }, [user, navigate]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setStep(2);
-        setTimeout(() => {
-            alert('Appointment request sent! View details in your dashboard.');
-            navigate('/clinic');
-        }, 3000);
+        try {
+            await api.appointments.create({
+                doctorId: parseInt(doctorId),
+                ownerName: formData.ownerName,
+                petName: formData.petName,
+                date: formData.date,
+                time: formData.time,
+                reason: formData.reason
+            }, user.email);
+
+            setStep(2);
+            setTimeout(() => {
+                navigate('/clinic');
+            }, 3000);
+        } catch (error) {
+            console.error("Booking failed", error);
+            alert("Failed to book appointment. Please try again.");
+        }
     };
 
     const handleChange = (e) => {
@@ -113,7 +134,7 @@ const BookAppointment = () => {
                                 <p className="text-gray-500 font-bold max-w-sm mb-10">We've sent your request to Dr. {doctor?.name.split(' ')[1]}. You will receive a notification once confirmed.</p>
                                 <div className="flex flex-col gap-4 w-full max-w-xs">
                                     <Button variant="secondary" onClick={() => navigate('/clinic')}>Back to Clinic</Button>
-                                    <Button variant="ghost" className="text-health font-bold">Manage Appointments</Button>
+                                    <Button variant="ghost" className="text-health font-bold" onClick={() => navigate('/profile')}>Manage Appointments</Button>
                                 </div>
                             </div>
                         )}

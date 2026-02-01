@@ -10,20 +10,34 @@ const Register = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        password: ''
+        password: '',
+        confirmPassword: ''
     });
+    const [agreeTerms, setAgreeTerms] = useState(false);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
+
+        if (formData.password !== formData.confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        if (!agreeTerms) {
+            alert("You must agree to the terms.");
+            return;
+        }
+
         setLoading(true);
         try {
-            await api.auth.register(formData);
-            alert('Registration successful! Please sign in.');
-            navigate('/login');
+            const res = await api.auth.register(formData);
+            // res contains { message, email }
+            navigate('/verify-otp', { state: { email: formData.email } });
         } catch (err) {
             console.error(err);
+            alert("Registration failed. " + err.message);
         } finally {
             setLoading(false);
         }
@@ -70,6 +84,26 @@ const Register = () => {
                                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-health transition-colors" size={20} />
                                 <Input type="password" name="password" placeholder="••••••••" className="pl-12 py-7 rounded-2xl border-gray-100 shadow-sm text-lg focus:border-health focus:ring-health" onChange={handleChange} required />
                             </div>
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-black text-gray-400 ml-2 uppercase tracking-widest">Confirm Password</label>
+                            <div className="relative group">
+                                <ShieldCheck className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-health transition-colors" size={20} />
+                                <Input type="password" name="confirmPassword" placeholder="••••••••" className="pl-12 py-7 rounded-2xl border-gray-100 shadow-sm text-lg focus:border-health focus:ring-health" onChange={handleChange} required />
+                            </div>
+                        </div>
+
+                        <div className="flex items-center gap-3 ml-2">
+                            <input
+                                type="checkbox"
+                                id="terms"
+                                className="w-5 h-5 rounded-lg border-2 border-gray-300 text-health focus:ring-health transition-all cursor-pointer"
+                                checked={agreeTerms}
+                                onChange={(e) => setAgreeTerms(e.target.checked)}
+                            />
+                            <label htmlFor="terms" className="text-sm font-bold text-gray-500 cursor-pointer select-none">
+                                I agree to the <span className="text-health underline">Terms & Conditions</span>
+                            </label>
                         </div>
 
                         <Button type="submit" className="w-full py-8 rounded-[1.5rem] text-xl font-black shadow-xl shadow-health/20 bg-health hover:bg-emerald-600 mt-4 group" disabled={loading}>

@@ -17,14 +17,17 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        // Load static/mock data immediately
+        setFeaturedDoctors(doctorsData.filter(d => d.id !== 0).slice(0, 2));
+
         const fetchData = async () => {
             try {
                 const [products, blog] = await Promise.all([
-                    api.products.getAll(),
-                    api.blog.getAll().catch(() => []), // Fallback if backend empty/fails
+                    api.products.getAll().catch(() => []), // Safe fallback
+                    api.blog.getAll().catch(() => []),
                 ]);
                 setFeaturedProducts(products.slice(0, 4));
-                setFeaturedDoctors(doctorsData.filter(d => d.id !== 0).slice(0, 4));
+
                 // Merge static data with backend data (Static first)
                 setLatestArticles([...staticBlogData, ...blog].slice(0, 3));
             } catch (error) {
@@ -82,16 +85,16 @@ const Home = () => {
                         </div>
                     </div>
 
-                    <div className="relative">
-                        <div className="aspect-square relative z-10 rounded-[3rem] overflow-hidden shadow-2xl shadow-primary/20 rotate-3 hover:rotate-0 transition-transform duration-700">
+                    <div className="relative group">
+                        <div className="relative z-10 w-full h-full transform transition-all duration-700 rotate-3 hover:rotate-0 hover:scale-105 rounded-[3.5rem] overflow-hidden shadow-2xl shadow-primary/10">
                             <img
-                                src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=800"
-                                alt="Happy Dog"
+                                src="https://www.mrmochaspet.com/cdn/shop/files/Screen_Shot_2024-02-28_at_7.27.25_PM.png?v=1709166485&width=1020"
+                                alt="Pawly Pet"
                                 className="w-full h-full object-cover"
                             />
                         </div>
                         {/* Floating UI segments */}
-                        <div className="absolute top-12 right-12 bg-white p-4 rounded-2xl shadow-xl z-20 animate-pulse border border-gray-100 hidden sm:block">
+                        <div className="absolute -top-6 -right-6 bg-white p-4 rounded-2xl shadow-xl z-20 animate-pulse border border-gray-100 hidden sm:block">
                             <div className="flex items-center gap-3">
                                 <div className="h-10 w-10 bg-green-100 text-health rounded-full flex items-center justify-center">
                                     <Calendar size={20} />
@@ -102,7 +105,7 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="absolute -bottom-10 -left-10 bg-white p-6 rounded-3xl shadow-2xl z-20 border border-gray-100 hidden lg:block max-w-[200px]">
+                        <div className="absolute -bottom-16 -left-16 bg-white p-6 rounded-3xl shadow-2xl z-20 border border-gray-100 hidden lg:block max-w-[200px]">
                             <div className="flex -space-x-3 mb-4">
                                 {[1, 2, 3].map(i => (
                                     <div key={i} className="h-10 w-10 rounded-full border-4 border-white overflow-hidden">
@@ -136,8 +139,12 @@ const Home = () => {
                                     <Button className="rounded-xl shadow-lg shadow-primary/10">Book Online</Button>
                                 </Link>
                             </div>
-                            <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 group-hover:scale-110 transition-transform duration-700">
-                                <img src="https://images.unsplash.com/photo-1599443015574-be5fe8a05783?auto=format&fit=crop&q=80&w=400" className="w-full h-full object-cover" />
+                            <div className="absolute top-0 right-0 w-3/5 h-full group-hover:scale-105 transition-transform duration-700 [mask-image:linear-gradient(to_left,black,transparent)]">
+                                <img
+                                    src="https://images.unsplash.com/photo-1599443015574-be5fe8a05783?auto=format&fit=crop&q=80&w=600"
+                                    className="w-full h-full object-cover"
+                                    alt="Health Clinic"
+                                />
                             </div>
                         </div>
 

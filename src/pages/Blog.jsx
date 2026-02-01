@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../services/api';
 import Badge from '../components/ui/Badge';
+import { Card } from '../components/ui/Card';
 import { Calendar, User, ArrowRight, Search } from 'lucide-react';
+import staticBlogData from '../services/mockData/blog.json';
 
 const Blog = () => {
     const [posts, setPosts] = useState([]);
@@ -10,9 +12,16 @@ const Blog = () => {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const data = await api.blog.getAll();
-            setPosts(data);
-            setLoading(false);
+            try {
+                const data = await api.blog.getAll();
+                // Merge static data with backend data
+                setPosts([...staticBlogData, ...(data || [])]);
+            } catch (error) {
+                console.error('Failed to fetch blog posts:', error);
+                setPosts(staticBlogData);
+            } finally {
+                setLoading(false);
+            }
         };
         fetchPosts();
     }, []);
@@ -34,29 +43,32 @@ const Blog = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 {posts.map((post) => (
-                    <article key={post.id} className="group cursor-pointer">
-                        <Link to={`/blog/${post.id}`} className="space-y-6 block">
-                            <div className="aspect-[16/10] rounded-[2.5rem] overflow-hidden shadow-2xl shadow-gray-200/50 border border-gray-100 relative">
-                                <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                                <div className="absolute top-6 left-6">
-                                    <Badge variant="secondary" className="bg-white/90 backdrop-blur-sm text-gray-900 border-none shadow-sm">{post.category}</Badge>
+                    <Card key={post.id} className="rounded-[2.5rem] border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 group flex flex-col h-full bg-white">
+                        <Link to={`/blog/${post.id}`} className="flex flex-col h-full">
+                            <div className="aspect-video relative overflow-hidden">
+                                <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                <div className="absolute top-4 left-4">
+                                    <Badge variant="playful" className="bg-white/90 backdrop-blur-sm border-none shadow-sm">{post.category}</Badge>
                                 </div>
                             </div>
-
-                            <div className="space-y-4 px-4">
-                                <div className="flex items-center gap-4 text-xs font-black text-gray-400 uppercase tracking-widest">
+                            <div className="p-8 flex flex-col flex-grow">
+                                <div className="flex items-center gap-3 text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">
                                     <span className="flex items-center gap-1.5"><Calendar size={14} className="text-primary" /> {post.date}</span>
                                     <span className="h-1 w-1 bg-gray-200 rounded-full"></span>
                                     <span className="flex items-center gap-1.5"><User size={14} className="text-primary" /> {post.author}</span>
                                 </div>
-                                <h2 className="text-2xl font-black text-gray-900 leading-tight group-hover:text-primary transition-colors">{post.title}</h2>
-                                <p className="text-gray-500 font-medium leading-relaxed italic">{post.excerpt}</p>
-                                <div className="pt-4 flex items-center gap-2 text-primary font-black uppercase tracking-widest text-xs group-hover:gap-4 transition-all">
+                                <h3 className="text-2xl font-black text-gray-900 mb-4 group-hover:text-primary transition-colors leading-tight">
+                                    {post.title}
+                                </h3>
+                                <p className="text-gray-600 font-medium mb-8 line-clamp-3 italic">
+                                    {post.excerpt}
+                                </p>
+                                <div className="mt-auto inline-flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest hover:gap-4 transition-all">
                                     Read Full Story <ArrowRight size={16} />
                                 </div>
                             </div>
                         </Link>
-                    </article>
+                    </Card>
                 ))}
             </div>
 

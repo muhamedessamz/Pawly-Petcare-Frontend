@@ -102,9 +102,11 @@ const DoctorDetails = () => {
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <Button size="lg" className="shadow-xl shadow-primary/20">
-                                    Book Appointment
-                                </Button>
+                                <Link to={`/book-appointment/${doctor.id}`}>
+                                    <Button size="lg" className="shadow-xl shadow-primary/20 w-full sm:w-auto">
+                                        Book Appointment
+                                    </Button>
+                                </Link>
                                 <Button variant="outline" size="lg" className="bg-white">
                                     Send Message
                                 </Button>

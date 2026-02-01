@@ -4,17 +4,38 @@ import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/Card';
 import { CreditCard, Truck, ShieldCheck, ArrowRight, CheckCircle2, Lock, ShoppingBag } from 'lucide-react';
+import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
+import { api } from '../services/api';
 
 const Checkout = () => {
     const navigate = useNavigate();
+    const { cart, cartTotal, clearCart } = useCart();
+    const { user } = useAuth();
     const [step, setStep] = useState(1);
 
-    const handlePurchase = (e) => {
+    const handlePurchase = async (e) => {
         e.preventDefault();
-        setStep(2);
-        setTimeout(() => {
-            navigate('/');
-        }, 5000);
+        try {
+            await api.orders.create({
+                totalAmount: cartTotal + 10.50, // Including Tax
+                items: cart.map(item => ({
+                    productId: item.id,
+                    productName: item.name,
+                    quantity: item.quantity,
+                    price: item.price
+                }))
+            }, user.email);
+
+            clearCart();
+            setStep(2);
+            setTimeout(() => {
+                navigate('/');
+            }, 5000);
+        } catch (error) {
+            console.error("Order failed", error);
+            alert("Failed to place order. Please try again.");
+        }
     };
 
     if (step === 2) {
@@ -107,7 +128,7 @@ const Checkout = () => {
                             <div className="space-y-4 pb-8 border-b border-gray-50">
                                 <div className="flex justify-between font-bold text-gray-500 italic">
                                     <span>Subtotal</span>
-                                    <span>$124.00</span>
+                                    <span>${cartTotal.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between font-bold text-gray-500 italic">
                                     <span>Shipping</span>
@@ -120,7 +141,7 @@ const Checkout = () => {
                             </div>
                             <div className="pt-8 flex justify-between items-baseline mb-8">
                                 <span className="text-sm font-black text-gray-900 uppercase tracking-widest">Total Price</span>
-                                <span className="text-4xl font-black text-primary">$134.50</span>
+                                <span className="text-4xl font-black text-primary">${(cartTotal + 10.50).toFixed(2)}</span>
                             </div>
                             <div className="bg-blue-50/50 p-4 rounded-2xl flex items-center gap-3 text-xs font-bold text-primary">
                                 <ShieldCheck size={16} /> 30-Day Money Back Guarantee

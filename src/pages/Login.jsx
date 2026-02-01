@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { api } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '../components/ui/Card';
@@ -11,6 +12,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const { login } = useAuth(); // Use context
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -18,14 +20,15 @@ const Login = () => {
         setError('');
         setLoading(true);
         try {
-            const user = await api.auth.login(email, password);
-            if (email === 'admin@pawly.com') {
+            const user = await login(email, password);
+            if (user.role === 'Admin') {
                 navigate('/dashboard');
             } else {
                 navigate('/');
             }
-        } catch {
-            setError('Invalid credentials. Try admin@pawly.com / admin');
+        } catch (err) {
+            console.error(err);
+            setError('Invalid email or password. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -74,7 +77,7 @@ const Login = () => {
                         <div className="space-y-2">
                             <div className="flex justify-between items-center ml-2">
                                 <label className="text-sm font-black text-gray-400 uppercase tracking-widest">Password</label>
-                                <Link to="#" className="text-xs font-black text-primary hover:underline">Forgot?</Link>
+                                <Link to="/forgot-password" className="text-xs font-black text-primary hover:underline">Forgot?</Link>
                             </div>
                             <div className="relative group">
                                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors" size={20} />

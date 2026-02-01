@@ -10,28 +10,35 @@ const BlogDetails = () => {
     const { id } = useParams();
     const [article, setArticle] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [relatedPosts, setRelatedPosts] = useState([]);
 
     useEffect(() => {
         const fetchArticle = async () => {
             setLoading(true);
             try {
-                // 1. Try to find in static data first
-                const staticArticle = staticBlogData.find(p => p.id === parseInt(id));
-
-                if (staticArticle) {
-                    setArticle(staticArticle);
-                } else {
-                    // 2. Fallback to API
-                    const apiArticle = await api.blog.getById(id);
-                    setArticle(apiArticle);
+                let data = null;
+                try {
+                    data = await api.blog.getById(id);
+                } catch (e) {
+                    console.log("Post not found in API, checking static data");
                 }
+
+                if (!data) {
+                    data = staticBlogData.find(p => p.id === parseInt(id));
+                }
+
+                setArticle(data);
+
+                // Get related posts (exclude current)
+                const allBlogs = await api.blog.getAll().catch(() => []);
+                const merged = [...staticBlogData, ...allBlogs];
+                setRelatedPosts(merged.filter(p => p.id !== parseInt(id)).slice(0, 3));
             } catch (error) {
-                console.error("Failed to load article", error);
+                console.error('Failed to fetch blog detail', error);
             } finally {
                 setLoading(false);
             }
         };
-
         fetchArticle();
     }, [id]);
 

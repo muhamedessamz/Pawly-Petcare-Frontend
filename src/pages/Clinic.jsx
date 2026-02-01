@@ -4,6 +4,7 @@ import Input from '../components/ui/Input';
 import { Search, Stethoscope, MapPin, Sparkles, Filter, ArrowRight } from 'lucide-react';
 import doctorsData from '../services/mockData/doctors.json';
 import Button from '../components/ui/Button';
+import veterinaryIcon from '../assets/veterinary.png';
 
 
 
@@ -53,9 +54,9 @@ const Clinic = () => {
                 <div className="max-w-7xl mx-auto px-4 relative z-10">
                     <div className="absolute top-0 right-0 p-8 opacity-10 hidden lg:block">
                         <img
-                            src="https://img.icons8.com/?size=100&id=43344&format=png&color=000000"
-                            alt="Dog Icon"
-                            className="w-[250px] h-[250px] object-contain opacity-50"
+                            src={veterinaryIcon}
+                            alt="Veterinary Icon"
+                            className="w-[400px] h-[400px] object-contain opacity-80"
                         />
                     </div>
 
@@ -135,8 +136,21 @@ const Clinic = () => {
                         ) : (
                             <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
                                 {filteredDoctors.length > 0 ? (
-                                    filteredDoctors.map((doctor) => (
-                                        <DoctorCard key={doctor.id} doctor={doctor} />
+                                    filteredDoctors.map((doctor, index) => (
+                                        <div
+                                            key={doctor.id}
+                                            className={`${filteredDoctors.length % 2 !== 0 && index === filteredDoctors.length - 1
+                                                ? 'xl:col-span-2 flex justify-center'
+                                                : ''
+                                                } h-full`}
+                                        >
+                                            <div className={`${filteredDoctors.length % 2 !== 0 && index === filteredDoctors.length - 1
+                                                ? 'w-full xl:w-1/2 max-w-[550px]'
+                                                : 'w-full h-full'
+                                                }`}>
+                                                <DoctorCard doctor={doctor} />
+                                            </div>
+                                        </div>
                                     ))
                                 ) : (
                                     <div className="col-span-full py-32 flex flex-col items-center justify-center text-center bg-white rounded-[3rem] border border-dashed border-gray-200">

@@ -99,8 +99,93 @@ export const api = {
       });
       return handleResponse(response);
     },
+    verifyOtp: async (data) => {
+      const response = await fetch(`${API_URL}/auth/verify-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      return handleResponse(response);
+    },
+    resendOtp: async (email) => {
+      const response = await fetch(`${API_URL}/auth/resend-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      return handleResponse(response);
+    },
+    forgotPassword: async (email) => {
+      const response = await fetch(`${API_URL}/auth/forgot-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      return handleResponse(response);
+    },
+    resetPassword: async (data) => {
+      const response = await fetch(`${API_URL}/auth/reset-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      return handleResponse(response);
+    },
   },
   // Admin specific (using other services mostly, but placeholder for stats if added)
+
+  user: {
+    getProfile: async (email) => {
+      const response = await fetch(`${API_URL}/user/profile`, {
+        method: 'POST', // Using POST for security/body if needed, or query param
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      return handleResponse(response);
+    },
+    updateProfile: async (email, formData) => {
+      // FormData is handled differently, don't set Content-Type header manually
+      const response = await fetch(`${API_URL}/user/profile?email=${email}`, {
+        method: 'PUT',
+        body: formData, // FormData object
+      });
+      return handleResponse(response);
+    }
+  },
+  appointments: {
+    create: async (data, userEmail) => {
+      const response = await fetch(`${API_URL}/appointment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-User-Email': userEmail
+        },
+        body: JSON.stringify(data)
+      });
+      return handleResponse(response);
+    },
+    getMy: async (email) => {
+      const response = await fetch(`${API_URL}/appointment/my-appointments?email=${email}`);
+      return handleResponse(response);
+    }
+  },
+  orders: {
+    create: async (data, userEmail) => {
+      const response = await fetch(`${API_URL}/order`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-User-Email': userEmail
+        },
+        body: JSON.stringify(data)
+      });
+      return handleResponse(response);
+    },
+    getMy: async (email) => {
+      const response = await fetch(`${API_URL}/order/my-orders?email=${email}`);
+      return handleResponse(response);
+    }
+  },
   admin: {
     getStats: async () => {
       const response = await fetch(`${API_URL}/admin/stats`);

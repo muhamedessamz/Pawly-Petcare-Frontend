@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import { Star, Truck, ShieldCheck, ArrowLeft, Heart, Share2, Info } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 
 const ProductDetails = () => {
     const { addToCart } = useCart();
+    const { user } = useAuth();
+    const navigate = useNavigate();
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -92,11 +95,30 @@ const ProductDetails = () => {
                         <Button
                             size="lg"
                             className="h-16 rounded-[1.25rem] text-lg font-black shadow-xl shadow-primary/20"
-                            onClick={() => addToCart(product)}
+                            onClick={() => {
+                                if (!user) {
+                                    alert("Please log in to purchase items.");
+                                    navigate('/login');
+                                    return;
+                                }
+                                addToCart(product)
+                            }}
                         >
                             Add to Cart
                         </Button>
-                        <Button size="lg" variant="secondary" className="h-16 rounded-[1.25rem] bg-gray-900 text-white hover:bg-gray-800">Buy It Now</Button>
+                        <Button
+                            size="lg"
+                            variant="secondary"
+                            className="h-16 rounded-[1.25rem] bg-gray-900 text-white hover:bg-gray-800"
+                            onClick={() => {
+                                if (!user) {
+                                    alert("Please log in to purchase items.");
+                                    navigate('/login');
+                                    return;
+                                }
+                                // Buy logic
+                            }}
+                        >Buy It Now</Button>
                     </div>
 
                     <div className="space-y-6 pt-10 border-t border-gray-100">

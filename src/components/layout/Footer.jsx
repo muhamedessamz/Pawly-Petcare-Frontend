@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Facebook, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { Heart, Facebook, Twitter, Instagram, Mail, Phone, MapPin, PawPrint } from 'lucide-react';
 
 const Footer = () => {
     return (
@@ -10,9 +10,9 @@ const Footer = () => {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
                     <div className="space-y-8">
-                        <Link to="/" className="flex items-center gap-2">
-                            <div className="h-12 w-12 bg-primary rounded-2xl flex items-center justify-center text-white shadow-xl shadow-primary/20">
-                                <Heart size={28} fill="currentColor" />
+                        <Link to="/" className="flex items-center gap-2 group">
+                            <div className="h-12 w-12 bg-white/10 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-white/5 group-hover:scale-110 transition-transform">
+                                <PawPrint size={28} strokeWidth={2.5} />
                             </div>
                             <span className="text-3xl font-black tracking-tight text-white flex items-baseline">
                                 Pawly<span className="text-primary">.</span>

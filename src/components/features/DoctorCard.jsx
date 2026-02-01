@@ -51,7 +51,7 @@ const DoctorCard = ({ doctor }) => {
             </div>
 
             <CardFooter className="px-8 pb-8 pt-0 mt-auto flex-col sm:flex-row gap-4">
-                <Link to={`/doctors/${doctor.id}`} className="w-full">
+                <Link to={`/book-appointment/${doctor.id}`} className="w-full">
                     <Button variant="primary" className="w-full bg-health hover:bg-emerald-600 shadow-lg shadow-health/20 group/btn">
                         Book Appointment <ArrowRight size={18} className="ml-2 group-hover/btn:translate-x-1 transition-transform" />
                     </Button>
