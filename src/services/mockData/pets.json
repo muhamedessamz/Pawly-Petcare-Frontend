@@ -1,0 +1,104 @@
+[
+    {
+        "id": 1,
+        "name": "Luna",
+        "species": "Dog",
+        "breed": "Golden Retriever",
+        "age": "2 years",
+        "gender": "Female",
+        "size": "Medium",
+        "story": "Luna was found wandering near a park. She's incredibly friendly, loves children, and is looking for a family that will take her on long walks.",
+        "traits": [
+            "Affectionate",
+            "Energetic",
+            "Good with Kids"
+        ],
+        "status": "Available",
+        "image": "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+        "id": 2,
+        "name": "Oliver",
+        "species": "Cat",
+        "breed": "Siamese",
+        "age": "1 year",
+        "gender": "Male",
+        "size": "Small",
+        "story": "Oliver is a gentle soul who loves sunny spots and soft blankets. He was rescued from a rainy street and now just wants a quiet home.",
+        "traits": [
+            "Quiet",
+            "Gentle",
+            "Independent"
+        ],
+        "status": "Available",
+        "image": "https://images.unsplash.com/photo-1513245543132-31f507417b26?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+        "id": 3,
+        "name": "Max",
+        "species": "Dog",
+        "breed": "German Shepherd",
+        "age": "4 years",
+        "gender": "Male",
+        "size": "Large",
+        "story": "Max is a loyal protector who is highly trained. He needs an experienced owner who can continue his active lifestyle.",
+        "traits": [
+            "Loyal",
+            "Protective",
+            "Trained"
+        ],
+        "status": "Available",
+        "image": "https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+        "id": 4,
+        "name": "Bella",
+        "species": "Cat",
+        "breed": "Persian",
+        "age": "3 years",
+        "gender": "Female",
+        "size": "Small",
+        "story": "Bella is the queen of the house. She loves to be groomed and will purr for hours if you give her enough attention.",
+        "traits": [
+            "Elegant",
+            "Cuddly",
+            "Calm"
+        ],
+        "status": "Available",
+        "image": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+        "id": 5,
+        "name": "Cooper",
+        "species": "Dog",
+        "breed": "Beagle",
+        "age": "5 months",
+        "gender": "Male",
+        "size": "Small",
+        "story": "Cooper is a bundle of joy! He's still learning the ropes but his curiosity is unmatched. Great for active families.",
+        "traits": [
+            "Playful",
+            "Curious",
+            "Vocal"
+        ],
+        "status": "Available",
+        "image": "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+        "id": 6,
+        "name": "Milo",
+        "species": "Cat",
+        "breed": "Maine Coon",
+        "age": "2 years",
+        "gender": "Male",
+        "size": "Large",
+        "story": "Milo is a 'gentle giant'. Despite his size, he's very soft-spoken and loves to follow his humans around the house.",
+        "traits": [
+            "Friendly",
+            "Huge",
+            "Social"
+        ],
+        "status": "Available",
+        "image": "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&q=80&w=800"
+    }
+]

@@ -1,0 +1,121 @@
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { ShoppingCart, User, Stethoscope, Store, Home, Menu, X, Heart, Activity } from 'lucide-react';
+import Button from '../ui/Button';
+import { cn } from '../../utils/cn';
+import { useCart } from '../../context/CartContext';
+
+const Navbar = () => {
+    const { cartCount } = useCart();
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const location = useLocation();
+
+    const isActive = (path) => location.pathname === path;
+
+    const navLinks = [
+        { name: 'Home', path: '/', icon: <Home size={18} /> },
+        { name: 'Store', path: '/store', icon: <Store size={18} /> },
+        { name: 'Clinic', path: '/clinic', icon: <Stethoscope size={18} /> },
+        { name: 'Adoption', path: '/adoption', icon: <Heart size={18} /> },
+        { name: 'Grooming', path: '/grooming', icon: <Heart size={18} /> },
+        { name: 'Blog', path: '/blog', icon: <Activity size={18} /> },
+    ];
+
+    return (
+        <nav className="border-b border-gray-100 bg-white/80 backdrop-blur-md sticky top-0 z-50 w-full">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="flex h-20 justify-between items-center">
+                    <div className="flex items-center gap-12">
+                        <Link to="/" className="flex items-center gap-2">
+                            <div className="h-10 w-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/30">
+                                <Heart size={24} fill="currentColor" />
+                            </div>
+                            <span className="text-2xl font-black tracking-tight flex items-baseline">
+                                <span className="text-gray-900">Pawly</span>
+                                <span className="text-primary">.</span>
+                            </span>
+                        </Link>
+
+                        <div className="hidden lg:flex items-center space-x-1">
+                            {navLinks.map((link) => (
+                                <Link
+                                    key={link.path}
+                                    to={link.path}
+                                    className={cn(
+                                        'px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-2',
+                                        isActive(link.path)
+                                            ? 'bg-primary/10 text-primary'
+                                            : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
+                                    )}
+                                >
+                                    {link.icon} {link.name}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="hidden md:flex items-center gap-4">
+                        <Link to="/cart">
+                            <Button variant="ghost" size="icon" className="relative group">
+                                <ShoppingCart size={22} className="group-hover:text-primary transition-colors" />
+                                {cartCount > 0 && (
+                                    <span className="absolute -top-1 -right-1 h-5 w-5 bg-playful text-white text-[10px] font-black rounded-full flex items-center justify-center ring-2 ring-white">
+                                        {cartCount}
+                                    </span>
+                                )}
+                            </Button>
+                        </Link>
+                        <div className="h-6 w-px bg-gray-100 mx-2"></div>
+                        <Link to="/login">
+                            <Button variant="primary" size="sm" className="rounded-xl shadow-lg shadow-primary/20">
+                                Sign In
+                            </Button>
+                        </Link>
+                    </div>
+
+                    <div className="flex lg:hidden">
+                        <button
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-colors"
+                        >
+                            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {/* Mobile Menu */}
+            {isMenuOpen && (
+                <div className="lg:hidden border-t border-gray-50 bg-white p-4 space-y-2">
+                    {navLinks.map((link) => (
+                        <Link
+                            key={link.path}
+                            to={link.path}
+                            onClick={() => setIsMenuOpen(false)}
+                            className={cn(
+                                'flex items-center gap-3 px-4 py-3 rounded-xl text-base font-semibold transition-colors',
+                                isActive(link.path) ? 'bg-primary/10 text-primary' : 'text-gray-500 hover:bg-gray-50'
+                            )}
+                        >
+                            {link.icon} {link.name}
+                        </Link>
+                    ))}
+                    <div className="pt-4 border-t border-gray-50 flex flex-col gap-2">
+                        <Link to="/cart" onClick={() => setIsMenuOpen(false)}>
+                            <Button variant="outline" className="w-full justify-start gap-3">
+                                <ShoppingCart size={20} /> My Cart
+                            </Button>
+                        </Link>
+                        <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                            <Button variant="primary" className="w-full shadow-lg shadow-primary/20">
+                                Sign In
+                            </Button>
+                        </Link>
+                    </div>
+                </div>
+            )}
+        </nav>
+    );
+};
+
+export default Navbar;
