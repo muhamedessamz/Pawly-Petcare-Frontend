@@ -1,72 +1,110 @@
-import products from './mockData/products.json';
-import doctors from './mockData/doctors.json';
-import pets from './mockData/pets.json';
-import blog from './mockData/blog.json';
+const API_URL = 'http://localhost:5044/api';
 
-// Simulate network delay
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const handleResponse = async (response) => {
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+};
 
 export const api = {
   products: {
     getAll: async () => {
-      await delay(500);
-      return products;
+      const response = await fetch(`${API_URL}/products`);
+      return handleResponse(response);
     },
     getById: async (id) => {
-      await delay(300);
-      return products.find((p) => p.id === Number(id));
+      const response = await fetch(`${API_URL}/products/${id}`);
+      return handleResponse(response);
     },
+    create: async (data) => {
+      const response = await fetch(`${API_URL}/products`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      return handleResponse(response);
+    },
+    delete: async (id) => {
+      const response = await fetch(`${API_URL}/products/${id}`, {
+        method: 'DELETE'
+      });
+      if (!response.ok) throw new Error('Failed to delete');
+      return true;
+    }
   },
   doctors: {
     getAll: async () => {
-      await delay(500);
-      return doctors;
+      const response = await fetch(`${API_URL}/doctors`);
+      return handleResponse(response);
     },
     getById: async (id) => {
-      await delay(300);
-      return doctors.find((d) => d.id === Number(id));
+      const response = await fetch(`${API_URL}/doctors/${id}`);
+      return handleResponse(response);
     },
+    create: async (data) => {
+      const response = await fetch(`${API_URL}/doctors`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      return handleResponse(response);
+    },
+    delete: async (id) => {
+      const response = await fetch(`${API_URL}/doctors/${id}`, {
+        method: 'DELETE'
+      });
+      if (!response.ok) throw new Error('Failed to delete');
+      return true;
+    }
   },
   pets: {
     getAll: async () => {
-      await delay(500);
-      return pets;
+      const response = await fetch(`${API_URL}/pets`);
+      return handleResponse(response);
     },
     getById: async (id) => {
-      await delay(300);
-      return pets.find((p) => p.id === Number(id));
+      const response = await fetch(`${API_URL}/pets/${id}`);
+      return handleResponse(response);
     },
   },
   blog: {
     getAll: async () => {
-      await delay(500);
-      return blog;
+      const response = await fetch(`${API_URL}/blog`);
+      return handleResponse(response);
     },
     getById: async (id) => {
-      await delay(300);
-      return blog.find((b) => b.id === Number(id));
+      const response = await fetch(`${API_URL}/blog/${id}`);
+      return handleResponse(response);
     },
   },
   auth: {
     login: async (credentials) => {
-      await delay(800);
-      if (credentials.email === 'admin@pawly.com' && credentials.password === 'admin') {
-        return {
-          user: { name: 'Admin User', email: 'admin@pawly.com', role: 'admin' },
-          token: 'mock-jwt-token',
-        };
+      const response = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials),
+      });
+      // Special case: handle 401
+      if (response.status === 401) {
+        throw new Error("Invalid credentials");
       }
-      return {
-        user: { name: 'John Doe', email: credentials.email, role: 'user' },
-        token: 'mock-jwt-token',
-      };
+      return handleResponse(response);
     },
     register: async (userData) => {
-      await delay(800);
-      return {
-        user: { ...userData, role: 'user' },
-        token: 'mock-jwt-token',
-      };
+      const response = await fetch(`${API_URL}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+      });
+      return handleResponse(response);
     },
   },
+  // Admin specific (using other services mostly, but placeholder for stats if added)
+  admin: {
+    getStats: async () => {
+      const response = await fetch(`${API_URL}/admin/stats`);
+      return handleResponse(response);
+    }
+  }
 };

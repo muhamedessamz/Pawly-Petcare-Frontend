@@ -19,6 +19,11 @@ import Adoption from './pages/Adoption';
 import PetDetails from './pages/PetDetails';
 import './App.css';
 
+import AdminLayout from './components/layout/AdminLayout';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import ProductsAdmin from './pages/admin/ProductsAdmin';
+import DoctorsAdmin from './pages/admin/DoctorsAdmin';
+
 function App() {
   return (
     <Routes>
@@ -40,6 +45,13 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="dashboard" element={<Dashboard />} />
+      </Route>
+
+      {/* Admin Routes */}
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<AdminDashboard />} />
+        <Route path="products" element={<ProductsAdmin />} />
+        <Route path="doctors" element={<DoctorsAdmin />} />
       </Route>
     </Routes>
   );
