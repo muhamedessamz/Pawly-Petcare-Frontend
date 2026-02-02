@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { api } from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import doctorsData from '../services/mockData/doctors.json';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/Card';
@@ -24,8 +25,19 @@ const BookAppointment = () => {
     useEffect(() => {
         if (doctorId) {
             const fetchDoctor = async () => {
-                const data = await api.doctors.getById(doctorId);
-                setDoctor(data);
+                try {
+                    const data = await api.doctors.getById(doctorId).catch(() => null);
+                    if (data) {
+                        setDoctor(data);
+                    } else {
+                        // Fallback to static data
+                        const staticDoc = doctorsData.find(d => d.id === parseInt(doctorId));
+                        setDoctor(staticDoc);
+                    }
+                } catch (error) {
+                    const staticDoc = doctorsData.find(d => d.id === parseInt(doctorId));
+                    setDoctor(staticDoc);
+                }
             };
             fetchDoctor();
         }
@@ -143,31 +155,56 @@ const BookAppointment = () => {
 
                 <div className="lg:col-span-4">
                     <div className="sticky top-32 space-y-6">
-                        <div className="bg-gray-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-2xl">
-                            <div className="absolute top-0 right-0 p-4 opacity-10">
+                        <div className="bg-[#0f172a] rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-2xl border border-white/5">
+                            <div className="absolute top-0 right-0 p-4 opacity-5">
                                 <Calendar size={120} />
                             </div>
                             <div className="relative z-10">
-                                <p className="text-health font-black uppercase tracking-widest text-[10px] mb-6">Booking Summary</p>
-                                <div className="flex items-center gap-4 mb-8">
-                                    <img src={doctor?.image} className="h-16 w-16 rounded-2xl object-cover border-4 border-white/10" />
+                                <div className="flex items-center gap-2 mb-8">
+                                    <div className="h-6 w-1 bg-health rounded-full"></div>
+                                    <p className="text-health font-black uppercase tracking-widest text-[11px]">Booking Summary</p>
+                                </div>
+
+                                <div className="flex items-center gap-5 mb-10">
+                                    <div className="h-20 w-20 rounded-2xl overflow-hidden ring-4 ring-white/10 shadow-xl bg-white/5 flex-shrink-0">
+                                        {doctor?.image ? (
+                                            <img
+                                                src={doctor.image}
+                                                alt={doctor.name}
+                                                className="h-full w-full object-cover"
+                                                style={doctor.imageStyles}
+                                            />
+                                        ) : (
+                                            <div className="h-full w-full flex items-center justify-center text-white/20">
+                                                <User size={32} />
+                                            </div>
+                                        )}
+                                    </div>
                                     <div>
-                                        <p className="font-black text-xl leading-none mb-1">{doctor?.name}</p>
-                                        <p className="text-health text-xs font-bold uppercase tracking-widest">{doctor?.specialty}</p>
+                                        <p className="font-black text-2xl leading-tight mb-1">{doctor?.name || 'Loading...'}</p>
+                                        <p className="text-gray-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                                            <span className="h-1.5 w-1.5 rounded-full bg-health"></span>
+                                            {doctor?.specialty || 'Medical Specialist'}
+                                        </p>
                                     </div>
                                 </div>
 
-                                <div className="space-y-4 pt-6 border-t border-white/10">
-                                    {formData.date && (
+                                <div className="space-y-5 pt-8 border-t border-white/5">
+                                    <div className="flex items-center justify-between group">
                                         <div className="flex items-center gap-3 text-sm font-bold text-gray-400">
-                                            <Calendar size={16} className="text-health" /> {formData.date}
+                                            <Calendar size={18} className="text-health opacity-60" />
+                                            <span>Date</span>
                                         </div>
-                                    )}
-                                    {formData.time && (
+                                        <span className="text-sm font-black text-white">{formData.date || 'Pick a date'}</span>
+                                    </div>
+
+                                    <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-3 text-sm font-bold text-gray-400">
-                                            <Clock size={16} className="text-health" /> {formData.time}
+                                            <Clock size={18} className="text-health opacity-60" />
+                                            <span>Time</span>
                                         </div>
-                                    )}
+                                        <span className="text-sm font-black text-white">{formData.time || 'Select time'}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
