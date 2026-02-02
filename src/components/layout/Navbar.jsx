@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingCart, User, Stethoscope, Store, Home, Menu, X, Heart, Activity, PawPrint } from 'lucide-react';
+import { ShoppingCart, User, Stethoscope, Store, Home, Menu, X, Heart, Activity, PawPrint, Scissors } from 'lucide-react';
 import Button from '../ui/Button';
 import { cn } from '../../utils/cn';
 import { useCart } from '../../context/CartContext';
@@ -19,17 +19,17 @@ const Navbar = () => {
         { name: 'Store', path: '/store', icon: <Store size={18} /> },
         { name: 'Clinic', path: '/clinic', icon: <Stethoscope size={18} /> },
         { name: 'Adoption', path: '/adoption', icon: <Heart size={18} /> },
-        { name: 'Grooming', path: '/grooming', icon: <Heart size={18} /> },
+        { name: 'Grooming', path: '/grooming', icon: <Scissors size={18} /> },
         { name: 'Blog', path: '/blog', icon: <Activity size={18} /> },
     ];
 
     return (
         <nav className="border-b border-gray-100 bg-white/80 backdrop-blur-md sticky top-0 z-50 w-full">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex h-20 justify-between items-center">
-                    <div className="flex items-center gap-12">
-                        <Link to="/" className="flex items-center gap-2 group">
-                            <div className="h-10 w-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                <div className="flex h-18 justify-between items-center">
+                    <div className="flex items-center gap-16">
+                        <Link to="/" className="flex items-center gap-2 group shrink-0">
+                            <div className="h-9 w-9 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                                 <PawPrint size={24} strokeWidth={2.5} />
                             </div>
                             <span className="text-2xl font-black tracking-tight flex items-baseline">
@@ -38,13 +38,13 @@ const Navbar = () => {
                             </span>
                         </Link>
 
-                        <div className="hidden lg:flex items-center space-x-1">
+                        <div className="hidden lg:flex items-center gap-2">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.path}
                                     to={link.path}
                                     className={cn(
-                                        'px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-2',
+                                        'px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-2',
                                         isActive(link.path)
                                             ? 'bg-primary/10 text-primary'
                                             : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
@@ -56,10 +56,10 @@ const Navbar = () => {
                         </div>
                     </div>
 
-                    <div className="hidden md:flex items-center gap-4">
+                    <div className="hidden md:flex items-center gap-6">
                         <Link to="/cart">
-                            <Button variant="ghost" size="icon" className="relative group">
-                                <ShoppingCart size={22} className="group-hover:text-primary transition-colors" />
+                            <Button variant="ghost" className="relative group h-9 w-9 p-0 rounded-xl flex items-center justify-center">
+                                <ShoppingCart size={20} className="group-hover:text-primary transition-colors" />
                                 {cartCount > 0 && (
                                     <span className="absolute -top-1 -right-1 h-5 w-5 bg-playful text-white text-[10px] font-black rounded-full flex items-center justify-center ring-2 ring-white">
                                         {cartCount}
@@ -67,17 +67,16 @@ const Navbar = () => {
                                 )}
                             </Button>
                         </Link>
-                        <div className="h-6 w-px bg-gray-100 mx-2"></div>
-                        <div className="h-6 w-px bg-gray-100 mx-2"></div>
+                        <div className="h-6 w-px bg-gray-100"></div>
 
                         {user ? (
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-6">
                                 <Link to="/profile">
-                                    <Button variant="ghost" size="sm" className="gap-2 font-bold text-gray-700">
+                                    <Button variant="ghost" size="sm" className="gap-2 font-bold text-gray-700 hover:bg-gray-50 rounded-xl">
                                         <User size={18} /> Account
                                     </Button>
                                 </Link>
-                                <Button onClick={logout} variant="outline" size="sm" className="rounded-xl border-gray-200 text-xs">
+                                <Button onClick={logout} variant="outline" size="sm" className="rounded-xl border-gray-200 font-bold hover:bg-red-50 hover:text-red-500 hover:border-red-100 transition-colors">
                                     Sign Out
                                 </Button>
                             </div>

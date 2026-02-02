@@ -80,7 +80,7 @@ const Clinic = () => {
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                 />
                             </div>
-                            <Button className="bg-health hover:bg-emerald-600 px-8 py-7 rounded-2xl shadow-xl shadow-health/20 text-lg">
+                            <Button className="bg-health hover:bg-blue-700 px-8 py-7 rounded-2xl shadow-xl shadow-health/20 text-lg">
                                 Find Doctor
                             </Button>
                         </div>

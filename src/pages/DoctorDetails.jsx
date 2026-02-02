@@ -163,7 +163,7 @@ const DoctorDetails = () => {
                                     <p className="text-sm text-gray-400">24/7 monitoring and compassionate post-op care.</p>
                                 </div>
                                 <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
-                                    <ShieldCheck className="text-green-400 mb-3" size={24} />
+                                    <ShieldCheck className="text-blue-400 mb-3" size={24} />
                                     <h3 className="font-bold text-lg mb-1">Tech Specialists</h3>
                                     <p className="text-sm text-gray-400">Experts in imaging, lab work, and anesthesia safety.</p>
                                 </div>
@@ -181,7 +181,7 @@ const DoctorDetails = () => {
                                 <div key={day} className="flex justify-between items-center py-2 border-b border-gray-50 last:border-0">
                                     <span className="font-medium text-gray-500">{day}</span>
                                     {doctor.availability.includes(day) ? (
-                                        <Badge variant="outline" className="text-green-600 bg-green-50 border-green-100">Available</Badge>
+                                        <Badge variant="outline" className="text-blue-600 bg-blue-50 border-blue-100">Available</Badge>
                                     ) : (
                                         <span className="text-sm text-gray-300 font-bold">Off</span>
                                     )}

@@ -133,7 +133,7 @@ const BookAppointment = () => {
                                     </div>
                                 </div>
 
-                                <Button type="submit" className="w-full h-16 rounded-2xl bg-health hover:bg-emerald-600 text-xl font-black shadow-xl shadow-health/20 group">
+                                <Button type="submit" className="w-full h-16 rounded-2xl bg-health hover:bg-blue-700 text-xl font-black shadow-xl shadow-health/20 group">
                                     Confirm Reservation Details <ArrowLeft className="ml-2 rotate-180 group-hover:translate-x-1 transition-transform" />
                                 </Button>
                             </form>

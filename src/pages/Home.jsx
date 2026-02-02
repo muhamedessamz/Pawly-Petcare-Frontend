@@ -6,7 +6,7 @@ import DoctorCard from '../components/features/DoctorCard';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import { Card } from '../components/ui/Card';
-import { ArrowRight, ShieldCheck, Truck, HeartPulse, Sparkles, Star, Calendar, Quote, Store } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Truck, HeartPulse, Sparkles, Star, Calendar, Quote, Store, Heart, Clock, Shield, Users, CheckCircle2 } from 'lucide-react';
 import doctorsData from '../services/mockData/doctors.json';
 import staticBlogData from '../services/mockData/blog.json';
 
@@ -93,34 +93,31 @@ const Home = () => {
                                 className="w-full h-full object-cover"
                             />
                         </div>
-                        {/* Floating UI segments */}
-                        <div className="absolute -top-6 -right-6 bg-white p-4 rounded-2xl shadow-xl z-20 animate-pulse border border-gray-100 hidden sm:block">
-                            <div className="flex items-center gap-3">
-                                <div className="h-10 w-10 bg-green-100 text-health rounded-full flex items-center justify-center">
-                                    <Calendar size={20} />
-                                </div>
-                                <div>
-                                    <p className="text-xs text-gray-400 font-bold uppercase">Next Visit</p>
-                                    <p className="text-sm font-bold">Tomorrow, 10:00 AM</p>
-                                </div>
+                        <div className="absolute top-4 right-4 sm:-top-6 sm:-right-6 bg-white p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-xl z-20 animate-pulse border border-gray-100 flex items-center gap-3">
+                            <div className="h-8 w-8 sm:h-10 sm:w-10 bg-blue-100 text-health rounded-full flex items-center justify-center">
+                                <Calendar size={18} className="sm:w-5 sm:h-5" />
+                            </div>
+                            <div>
+                                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tight">Next Visit</p>
+                                <p className="text-xs sm:text-sm font-bold">Tomorrow, 10:00 AM</p>
                             </div>
                         </div>
-                        <div className="absolute -bottom-16 -left-16 bg-white p-6 rounded-3xl shadow-2xl z-20 border border-gray-100 hidden lg:block max-w-[200px]">
-                            <div className="flex -space-x-3 mb-4">
+                        <div className="absolute bottom-4 left-4 sm:-bottom-16 sm:-left-16 bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-2xl z-20 border border-gray-100 flex flex-col max-w-[150px] sm:max-w-[200px]">
+                            <div className="flex -space-x-2 sm:-space-x-3 mb-2 sm:mb-4">
                                 {[1, 2, 3].map(i => (
-                                    <div key={i} className="h-10 w-10 rounded-full border-4 border-white overflow-hidden">
+                                    <div key={i} className="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 sm:border-4 border-white overflow-hidden shadow-sm">
                                         <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" />
                                     </div>
                                 ))}
                             </div>
-                            <p className="text-sm font-bold text-gray-900">Trusted by over 10k owners locally.</p>
+                            <p className="text-[10px] sm:text-sm font-bold text-gray-900 leading-tight">Trusted by over 10k owners locally.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* Services Grid (Bento Style) */}
-            <section className="px-4 py-12">
+            <section className="px-4 pt-12 lg:pt-32 pb-12">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16 px-4">
                         <h2 className="text-4xl font-black text-gray-900 mb-4">Everything Under One Roof</h2>
@@ -167,15 +164,15 @@ const Home = () => {
                             <p className="text-gray-600 text-lg">Digital medical records at your fingertips.</p>
                         </div>
 
-                        <div className="md:col-span-8 bg-gray-100 rounded-[2.5rem] p-10 flex flex-col md:flex-row items-center gap-8 justify-between">
-                            <div>
+                        <div className="md:col-span-8 bg-gray-100 rounded-[2.5rem] p-10 flex flex-col md:flex-row items-center gap-8 justify-between group/delivery overflow-hidden relative">
+                            <div className="relative z-10">
                                 <div className="h-14 w-14 bg-gray-900 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg">
                                     <Truck size={28} />
                                 </div>
                                 <h3 className="text-3xl font-bold mb-4">Fast Delivery</h3>
                                 <p className="text-gray-600 text-lg">Local doorstep delivery within 2 hours.</p>
                             </div>
-                            <div className="flex gap-4 p-4 bg-white/50 backdrop-blur-sm rounded-3xl border border-white/50">
+                            <div className="flex gap-4 p-4 bg-white/50 backdrop-blur-sm rounded-3xl border border-white/50 relative z-10 transition-transform duration-500 group-hover/delivery:scale-105">
                                 <div className="text-center px-4 border-r border-gray-200">
                                     <p className="text-2xl font-black">2h</p>
                                     <p className="text-xs font-bold text-gray-400 uppercase tracking-tighter">Avg. Time</p>
@@ -222,74 +219,134 @@ const Home = () => {
             </section>
 
             {/* Premium Accessories CTA */}
-            <section className="px-4 py-20">
-                <div className="max-w-7xl mx-auto bg-gray-900 rounded-[3.5rem] p-12 md:p-20 text-white relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-1/2 h-full pointer-events-none group-hover:scale-105 transition-transform duration-1000">
-                        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover object-bottom" />
-                        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-900 to-transparent"></div>
-                    </div>
-                    <div className="relative z-10 lg:max-w-[48%]">
-                        <Badge variant="playful" className="bg-primary text-white border-none mb-6">New Collection</Badge>
-                        <h2 className="text-4xl md:text-6xl font-black mb-8 leading-tight tracking-tight">Luxury <br /><span className="text-primary">Accessories</span> for Your Elite Pet</h2>
-                        <p className="text-xl text-gray-400 font-medium mb-10 leading-relaxed italic">
-                            From handcrafted leather collars to smart GPS trackers, give your pet the best in style and safety.
-                        </p>
-                        <Link to="/store?category=Accessories">
-                            <Button size="lg" className="rounded-2xl px-10 py-6 text-xl shadow-2xl shadow-primary/20">
-                                Shop Accessories
-                            </Button>
-                        </Link>
+            <section className="px-4 py-4">
+                <div className="max-w-7xl mx-auto">
+                    <div className="flex flex-col lg:flex-row gap-6 items-stretch">
+                        {/* Text Card */}
+                        <div className="flex-1 bg-gray-900 rounded-[2rem] px-6 md:px-10 py-6 md:py-10 text-white group relative overflow-hidden flex flex-col justify-center border border-white/5">
+                            <div className="relative z-10">
+                                <Badge variant="playful" className="bg-primary/20 text-primary border-primary/30 mb-4 px-4 py-1.5 animate-pulse">New Collection</Badge>
+                                <h2 className="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight">Luxury <br /><span className="text-primary">Accessories</span> for Your Elite Pet</h2>
+                                <p className="text-base md:text-lg text-gray-400 font-medium mb-6 leading-relaxed italic max-w-[90%]">
+                                    From handcrafted leather collars to smart GPS trackers, give your pet the best in style and safety.
+                                </p>
+
+                                <div className="grid grid-cols-2 gap-4 mb-8">
+                                    <div className="flex items-center gap-2 text-sm text-gray-300 font-medium">
+                                        <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                            <ShieldCheck size={14} />
+                                        </div>
+                                        Premium Quality
+                                    </div>
+                                    <div className="flex items-center gap-2 text-sm text-gray-300 font-medium">
+                                        <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                            <Truck size={14} />
+                                        </div>
+                                        Fast Delivery
+                                    </div>
+                                </div>
+
+                                <Link to="/store?category=Accessories">
+                                    <Button size="md" className="rounded-xl px-8 py-3.5 text-base shadow-2xl shadow-primary/20 hover:scale-105 transition-all duration-300 bg-primary border-none text-white font-bold">
+                                        Explore Collection
+                                    </Button>
+                                </Link>
+                            </div>
+                            {/* Sophisticated background glow */}
+                            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full -mr-48 -mt-48 blur-[120px] group-hover:bg-primary/30 transition-all duration-700"></div>
+                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-playful/10 rounded-full -ml-32 -mb-32 blur-[80px]"></div>
+                        </div>
+
+                        {/* Image Card */}
+                        <div className="lg:w-[35%] h-[380px] lg:h-auto rounded-[2rem] overflow-hidden group relative border border-white/5">
+                            <img
+                                src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=800"
+                                className="w-full h-full object-cover object-bottom transition-transform duration-1000 group-hover:scale-110"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent"></div>
+
+                            {/* Floating Badge */}
+                            <div className="absolute top-6 right-6">
+                                <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 text-xs font-bold text-white tracking-wider flex items-center gap-2 shadow-2xl">
+                                    <Sparkles size={12} className="text-primary" />
+                                    LIMITED EDITION
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             {/* Testimonials */}
-            <section className="px-4 py-12 bg-white">
+            <section className="px-4 py-2 bg-white">
                 <div className="max-w-7xl mx-auto">
-                    <div className="bg-gray-900 rounded-[3rem] p-12 md:p-24 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-[45%] h-full pointer-events-none">
-                            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=600" className="w-full h-full object-cover" />
-                            <div className="absolute inset-0 bg-gray-900/40"></div>
-                            {/* Gradient mask to make the transition smoother */}
-                            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-gray-900 to-transparent"></div>
-                        </div>
-
-                        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                            <div>
-                                <div className="h-14 w-14 bg-playful rounded-2xl flex items-center justify-center text-white mb-8 shadow-xl shadow-playful/20">
-                                    <Quote size={28} />
+                    <div className="flex flex-col lg:flex-row gap-6 items-stretch">
+                        {/* Testimonial Card */}
+                        <div className="flex-1 bg-gray-900 rounded-[2rem] px-6 md:px-10 py-6 md:py-10 text-white relative overflow-hidden flex flex-col justify-center border border-white/5 group">
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-1 mb-4">
+                                    {[1, 2, 3, 4, 5].map((s) => (
+                                        <Star key={s} size={14} className="fill-playful text-playful" />
+                                    ))}
+                                    <span className="text-xs font-bold text-gray-500 ml-2 uppercase tracking-widest">Trustpilot 4.9/5</span>
                                 </div>
-                                <h2 className="text-4xl md:text-5xl font-black text-white mb-8 tracking-tight">Owners love us. <br /> Pets do too.</h2>
-                                <p className="text-gray-400 text-xl font-medium leading-relaxed italic max-w-[90%]">
+                                <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">Owners love us. <br /> Pets do too.</h2>
+                                <p className="text-gray-400 text-base md:text-lg font-medium leading-relaxed italic mb-8 max-w-[90%]">
                                     "I used to struggle with finding a reliable vet AND quality food.
                                     Pawly made it effortless. The clinic staff is amazing and the delivery is lightning fast!"
                                 </p>
-                                <div className="mt-10 flex items-center gap-4">
-                                    <div className="h-16 w-16 rounded-full overflow-hidden border-4 border-white/10 ring-4 ring-primary/20">
-                                        <img src="https://i.pravatar.cc/150?u=4" alt="Happy Customer" />
+                                <div className="flex items-center gap-4">
+                                    <div className="h-14 w-14 rounded-full overflow-hidden border-2 border-white/20 p-0.5 relative">
+                                        <img src="https://i.pravatar.cc/150?u=4" alt="Happy Customer" className="w-full h-full rounded-full object-cover" />
+                                        <div className="absolute -bottom-1 -right-1 bg-primary rounded-full p-1 border-2 border-gray-900">
+                                            <CheckCircle2 size={10} className="text-white" />
+                                        </div>
                                     </div>
                                     <div>
-                                        <p className="text-white font-bold text-lg">Alex Rivera</p>
-                                        <p className="text-gray-500 font-medium">Golden Retriever Mom</p>
+                                        <div className="flex items-center gap-2">
+                                            <p className="text-white font-bold text-base">Alex Rivera</p>
+                                            <Badge className="bg-white/5 text-[10px] py-0 px-2 h-4 border-white/10 text-gray-400">Verified Buyer</Badge>
+                                        </div>
+                                        <p className="text-gray-500 font-medium text-sm">Golden Retriever Mom</p>
                                     </div>
                                 </div>
                             </div>
+                            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-playful/10 rounded-full blur-[80px]"></div>
+                        </div>
 
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-4">
-                                    <div className="bg-white/5 backdrop-blur-md p-6 rounded-3xl border border-white/10 hover:border-white/20 transition-colors">
-                                        <p className="text-4xl font-black text-white mb-1">50k+</p>
-                                        <p className="text-gray-500 font-bold uppercase text-xs tracking-widest">Active Pets</p>
+                        {/* Stats Card */}
+                        <div className="lg:w-[35%] rounded-[2rem] overflow-hidden relative p-8 flex items-center justify-center bg-gray-900 group border border-white/5">
+                            <div className="absolute inset-0 z-0 opacity-20">
+                                <img
+                                    src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=600"
+                                    className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-gray-900/60"></div>
+                            </div>
+                            <div className="relative z-10 w-full space-y-4">
+                                <div className="grid grid-cols-2 gap-3">
+                                    <div className="bg-white/5 backdrop-blur-xl p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300">
+                                        <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-3">
+                                            <Users size={16} />
+                                        </div>
+                                        <p className="text-3xl font-black text-white mb-0.5">50k+</p>
+                                        <p className="text-gray-500 font-bold uppercase text-[9px] tracking-widest">Active Pets</p>
                                     </div>
-                                    <div className="bg-white/5 backdrop-blur-md p-6 rounded-3xl border border-white/10 mt-8">
-                                        <p className="text-4xl font-black text-white mb-1">24/7</p>
-                                        <p className="text-gray-500 font-bold uppercase text-xs tracking-widest">Support</p>
+                                    <div className="bg-white/5 backdrop-blur-xl p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300 mt-6">
+                                        <div className="h-8 w-8 rounded-full bg-playful/20 flex items-center justify-center text-playful mb-3">
+                                            <Heart size={16} />
+                                        </div>
+                                        <p className="text-3xl font-black text-white mb-0.5">100%</p>
+                                        <p className="text-gray-500 font-bold uppercase text-[9px] tracking-widest">Happiness</p>
                                     </div>
                                 </div>
-                                <div className="space-y-4 pt-12">
-                                    <div className="bg-white/5 backdrop-blur-md p-6 rounded-3xl border border-white/10">
-                                        <p className="text-4xl font-black text-white mb-1">100%</p>
-                                        <p className="text-gray-500 font-bold uppercase text-xs tracking-widest">Happiness</p>
+                                <div className="bg-white/5 backdrop-blur-xl p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300 w-full flex items-center gap-5">
+                                    <div className="h-10 w-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                                        <Shield size={20} />
+                                    </div>
+                                    <div>
+                                        <p className="text-2xl font-black text-white">24/7 Safety</p>
+                                        <p className="text-gray-500 font-bold uppercase text-[9px] tracking-widest">Expert Support Guaranteed</p>
                                     </div>
                                 </div>
                             </div>
@@ -302,21 +359,21 @@ const Home = () => {
             <section className="px-4 py-20 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full bg-health/5 skew-y-3 transform origin-top-left -z-10 bg-opacity-30"></div>
                 <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 lg:gap-20">
-                    <div className="w-full md:w-1/3 relative">
-                        <div className="aspect-[3/4] rounded-[3rem] overflow-hidden shadow-2xl shadow-health/20 rotate-3 border-4 border-white">
+                    <div className="w-full md:w-1/3 relative flex justify-center md:block">
+                        <div className="aspect-[3/4] w-full max-w-[320px] rounded-[3rem] overflow-hidden shadow-2xl shadow-health/20 md:rotate-3 border-4 border-white transition-transform duration-500 hover:rotate-0">
                             <img
                                 src="https://img.freepik.com/free-photo/close-up-health-worker_23-2149112506.jpg?t=st=1769968108~exp=1769971708~hmac=776163d86f26ae815d19154eb6dbe230a0e53b173b9720bffdc9e4a243b970a1"
                                 alt="Dr. Richard Hamilton"
                                 className="w-full h-full object-cover object-top"
                             />
                         </div>
-                        <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-3xl shadow-xl flex flex-col items-center border border-gray-100 animate-bounce-slow">
+                        <div className="absolute -bottom-6 right-1/2 translate-x-1/2 md:translate-x-0 md:-right-6 bg-white p-6 rounded-3xl shadow-xl flex flex-col items-center border border-gray-100 animate-bounce-slow z-10">
                             <div className="text-3xl font-black text-health mb-1">20+</div>
                             <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">Years Exp.</div>
                         </div>
                     </div>
 
-                    <div className="w-full md:w-2/3">
+                    <div className="w-full md:w-2/3 flex flex-col items-center md:items-start text-center md:text-left">
                         <Badge variant="playful" className="bg-health text-white border-none mb-6">Meet the Founder</Badge>
                         <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-8 leading-tight">
                             "Veterinary care isn't just a job.<br />
@@ -333,12 +390,12 @@ const Home = () => {
                             </p>
                         </div>
 
-                        <div className="mt-12 flex items-center gap-8">
+                        <div className="mt-12 flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
                             <div className="font-english-script text-4xl text-gray-900 transform -rotate-3 select-none" style={{ fontFamily: 'Brush Script MT, cursive' }}>
                                 Richard Hamilton
                             </div>
-                            <div className="h-10 w-px bg-gray-200"></div>
-                            <div>
+                            <div className="h-px w-12 sm:h-10 sm:w-px bg-gray-200"></div>
+                            <div className="text-center sm:text-left">
                                 <p className="font-bold text-gray-900 text-lg">Dr. Richard Hamilton</p>
                                 <p className="text-health font-bold text-sm uppercase tracking-wider">Chief Medical Officer</p>
                             </div>
@@ -348,7 +405,7 @@ const Home = () => {
             </section >
 
             {/* Learning Center (Blog Preview) */}
-            < section className="px-4 py-20 bg-gray-50/50" >
+            <section className="px-4 pt-10 pb-20 lg:py-20 bg-gray-50/50">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-6">
                         <div className="text-center md:text-left">
@@ -373,6 +430,7 @@ const Home = () => {
                                     <div className="aspect-video relative overflow-hidden">
                                         <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                                         <div className="absolute top-4 left-4">
+                                            {/* This badge is for blog articles, not doctor availability */}
                                             <Badge variant="playful" className="bg-white/90 backdrop-blur-sm border-none shadow-sm">{article.category}</Badge>
                                         </div>
                                     </div>
@@ -424,7 +482,7 @@ const Home = () => {
             </section >
 
             {/* Newsletter / Join */}
-            < section className="px-4 py-20 bg-primary/5 -mx-4 sm:-mx-6 lg:-mx-8" >
+            <section className="px-4 py-20 bg-gray-50">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-black mb-6">Stay ahead on pet wellness.</h2>
                     <p className="text-gray-500 text-lg mb-10 font-medium">Join 20k+ pet owners who receive our weekly nutrition tips and clinic updates.</p>

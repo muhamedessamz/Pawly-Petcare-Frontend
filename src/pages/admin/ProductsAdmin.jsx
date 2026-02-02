@@ -78,7 +78,7 @@ const ProductsAdmin = () => {
                                         ${product.price}
                                     </td>
                                     <td className="p-6">
-                                        <span className={`font-bold ${product.stock > 10 ? 'text-green-500' : 'text-red-500'}`}>
+                                        <span className={`font-bold ${product.stock > 10 ? 'text-blue-500' : 'text-red-500'}`}>
                                             {product.stock || 0} in stock
                                         </span>
                                     </td>
