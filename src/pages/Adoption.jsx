@@ -6,26 +6,22 @@ import Badge from '../components/ui/Badge';
 import { Card } from '../components/ui/Card';
 import { Search, Filter, Heart, ArrowRight, Dog, Cat, Info, MapPin } from 'lucide-react';
 
+import petsData from '../services/mockData/pets.json';
+
 const Adoption = () => {
-    const [pets, setPets] = useState([]);
-    const [filteredPets, setFilteredPets] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [pets, setPets] = useState(petsData);
+    const [filteredPets, setFilteredPets] = useState(petsData);
+    const [loading, setLoading] = useState(false);
     const [selectedSpecies, setSelectedSpecies] = useState('All');
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        const fetchPets = async () => {
-            try {
-                const data = await api.pets.getAll();
-                setPets(data);
-                setFilteredPets(data);
-            } catch (error) {
-                console.error("Failed to fetch pets", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchPets();
+        // Mock loading effect
+        setLoading(true);
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 500);
+        return () => clearTimeout(timer);
     }, []);
 
     useEffect(() => {
@@ -69,7 +65,7 @@ const Adoption = () => {
             {/* Filters */}
             <div className="mb-12 flex flex-col md:flex-row gap-6 items-center justify-between sticky top-24 z-30 bg-white/80 backdrop-blur-md p-4 rounded-3xl border border-gray-100 shadow-sm">
                 <div className="flex bg-gray-100 p-1.5 rounded-2xl w-full md:w-auto">
-                    {['All', 'Dog', 'Cat'].map((species) => (
+                    {['All', 'Dog', 'Cat', 'Other'].map((species) => (
                         <button
                             key={species}
                             onClick={() => setSelectedSpecies(species)}
@@ -81,6 +77,7 @@ const Adoption = () => {
                             {species === 'All' && <span className="flex items-center gap-2">All Pets</span>}
                             {species === 'Dog' && <span className="flex items-center gap-2"><Dog size={18} /> Dogs</span>}
                             {species === 'Cat' && <span className="flex items-center gap-2"><Cat size={18} /> Cats</span>}
+                            {species === 'Other' && <span className="flex items-center gap-2"><Filter size={18} /> Other</span>}
                         </button>
                     ))}
                 </div>

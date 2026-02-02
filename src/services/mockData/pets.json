@@ -100,5 +100,107 @@
         ],
         "status": "Available",
         "image": "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+        "id": 7,
+        "name": "Daisy",
+        "species": "Dog",
+        "breed": "Labrador",
+        "age": "1.5 years",
+        "gender": "Female",
+        "size": "Large",
+        "story": "Daisy is a ball of energy who loves water and fetch. She's looking for an active family with a big backyard.",
+        "traits": [
+            "Active",
+            "Friendly",
+            "Water-lover"
+        ],
+        "status": "Available",
+        "image": "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+        "id": 8,
+        "name": "Coco",
+        "species": "Dog",
+        "breed": "Poodle",
+        "age": "3 years",
+        "gender": "Female",
+        "size": "Medium",
+        "story": "Coco is highly intelligent and loves learning new tricks. She's great for someone looking for a smart companion.",
+        "traits": [
+            "Intelligent",
+            "Hypoallergenic",
+            "Alert"
+        ],
+        "status": "Available",
+        "image": "https://d3544la1u8djza.cloudfront.net/APHI/Blog/2023/July/MiniaturePoodle_Hero.jpg"
+    },
+    {
+        "id": 9,
+        "name": "Simba",
+        "species": "Cat",
+        "breed": "Bengal",
+        "age": "2 years",
+        "gender": "Male",
+        "size": "Medium",
+        "story": "Simba is very active and loves to climb. He needs plenty of vertical space and interactive toys.",
+        "traits": [
+            "Active",
+            "Adventurous",
+            "Beautiful"
+        ],
+        "status": "Available",
+        "image": "https://cfa.org/wp-content/uploads/2024/03/BengalPortrait.jpg"
+    },
+    {
+        "id": 10,
+        "name": "Thumper",
+        "species": "Other",
+        "breed": "Rabbit",
+        "age": "1 year",
+        "gender": "Male",
+        "size": "Small",
+        "story": "Thumper is a sweet bunny looking for a quiet indoor home. He loves fresh greens and gentle head rubs.",
+        "traits": [
+            "Quiet",
+            "Gentle",
+            "Vegetarian"
+        ],
+        "status": "Available",
+        "image": "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+        "id": 11,
+        "name": "Bluey",
+        "species": "Other",
+        "breed": "Parrot",
+        "age": "5 years",
+        "gender": "Male",
+        "size": "Small",
+        "story": "Bluey is a talkative fellow who knows over 50 words! He's looking for a social home that enjoys his chatter.",
+        "traits": [
+            "Talkative",
+            "Social",
+            "Long-lived"
+        ],
+        "status": "Available",
+        "image": "https://cdn.britannica.com/35/3635-050-96241EC1/Scarlet-macaw-ara-macao.jpg"
+    },
+    {
+        "id": 12,
+        "name": "Rocky",
+        "species": "Dog",
+        "breed": "Bulldog",
+        "age": "4 years",
+        "gender": "Male",
+        "size": "Medium",
+        "story": "Rocky is a low-energy couch potato. He's perfectly happy with short walks and long naps.",
+        "traits": [
+            "Chill",
+            "Stubborn",
+            "Lovable"
+        ],
+        "status": "Available",
+        "image": "https://spotpet.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fm5ehn3s5t7ec%2Fwp-image-197236%2F7790f11801e1cd1723d88f61bc59621b%2FAmerican-Bulldog-Breed-Guide.jpg&w=3840&q=75"
     }
 ]

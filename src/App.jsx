@@ -18,6 +18,7 @@ import Contact from './pages/Contact';
 import Checkout from './pages/Checkout';
 import Adoption from './pages/Adoption';
 import PetDetails from './pages/PetDetails';
+import AdoptionForm from './pages/AdoptionForm';
 import './App.css';
 
 import AdminLayout from './components/layout/AdminLayout';
@@ -46,6 +47,7 @@ function App() {
           <Route path="adoption" element={<Adoption />} />
           <Route path="list-pet" element={<ListPet />} />
           <Route path="pets/:id" element={<PetDetails />} />
+          <Route path="adopt/:id" element={<AdoptionForm />} />
           <Route path="grooming" element={<Grooming />} />
           <Route path="blog" element={<Blog />} />
           <Route path="blog/:id" element={<BlogDetails />} />

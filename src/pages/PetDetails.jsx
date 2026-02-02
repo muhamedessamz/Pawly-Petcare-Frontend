@@ -6,23 +6,22 @@ import Badge from '../components/ui/Badge';
 import { Card } from '../components/ui/Card';
 import { ArrowLeft, Heart, Share2, ClipboardCheck, Info, MapPin, Bone, CheckCircle2 } from 'lucide-react';
 
+import petsData from '../services/mockData/pets.json';
+
 const PetDetails = () => {
     const { id } = useParams();
     const [pet, setPet] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchPet = async () => {
-            try {
-                const data = await api.pets.getById(id);
-                setPet(data);
-            } catch (error) {
-                console.error("Failed to fetch pet details", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchPet();
+        // Mock fetching from local data
+        setLoading(true);
+        const timer = setTimeout(() => {
+            const foundPet = petsData.find(p => p.id === parseInt(id));
+            setPet(foundPet);
+            setLoading(false);
+        }, 500);
+        return () => clearTimeout(timer);
     }, [id]);
 
     if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="h-12 w-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div></div>;
@@ -41,7 +40,7 @@ const PetDetails = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
                 {/* Images & Quick Info */}
                 <div className="lg:col-span-7 space-y-10">
-                    <div className="aspect-[4/5] rounded-[4rem] overflow-hidden shadow-2xl relative group">
+                    <div className="aspect-[4/3] rounded-[4rem] overflow-hidden shadow-2xl relative group">
                         <img src={pet.image} alt={pet.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]" />
                         <div className="absolute top-8 right-8 flex flex-col gap-4">
                             <button className="h-14 w-14 bg-white/90 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-xl hover:bg-primary hover:text-white transition-all">
@@ -98,9 +97,11 @@ const PetDetails = () => {
                     </div>
 
                     <div className="mt-auto pt-10 border-t border-gray-100">
-                        <Button size="lg" className="w-full h-24 rounded-[1.8rem] text-2xl font-black flex items-center justify-center gap-4 shadow-2xl shadow-primary/30 group">
-                            Start Adoption Process <ArrowLeft size={24} className="rotate-180 group-hover:translate-x-2 transition-transform" />
-                        </Button>
+                        <Link to={`/adopt/${pet.id}`}>
+                            <Button size="lg" className="w-full h-24 rounded-[1.8rem] text-2xl font-black flex items-center justify-center gap-4 shadow-2xl shadow-primary/30 group">
+                                Start Adoption Process <ArrowLeft size={24} className="rotate-180 group-hover:translate-x-2 transition-transform" />
+                            </Button>
+                        </Link>
                         <p className="mt-6 text-center text-sm font-bold text-gray-400 flex items-center justify-center gap-2">
                             <ClipboardCheck size={18} /> Full medical clearance provided
                         </p>
