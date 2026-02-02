@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Package, Stethoscope, Users, Settings, LogOut, BookOpen } from 'lucide-react';
+import { LayoutDashboard, Package, Stethoscope, Users, Settings, LogOut, BookOpen, Heart } from 'lucide-react';
 
 const AdminLayout = () => {
     const location = useLocation();
@@ -41,6 +41,10 @@ const AdminLayout = () => {
 
                     <Link to="/admin/blog" className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-colors ${isActive('/admin/blog')}`}>
                         <BookOpen size={20} /> Blog & Articles
+                    </Link>
+
+                    <Link to="/admin/adoption-requests" className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-colors ${isActive('/admin/adoption-requests')}`}>
+                        <Heart size={20} /> Adoption Requests
                     </Link>
 
                     <Link to="/admin/users" className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-colors ${isActive('/admin/users')}`}>

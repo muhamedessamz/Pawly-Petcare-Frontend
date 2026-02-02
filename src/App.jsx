@@ -29,6 +29,8 @@ import VerifyOtp from './pages/VerifyOtp';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import Profile from './pages/Profile';
+import ListPet from './pages/ListPet';
+import AdoptionRequests from './pages/admin/AdoptionRequests';
 
 function App() {
   return (
@@ -42,6 +44,7 @@ function App() {
           <Route path="clinic" element={<Clinic />} />
           <Route path="doctors/:id" element={<DoctorDetails />} />
           <Route path="adoption" element={<Adoption />} />
+          <Route path="list-pet" element={<ListPet />} />
           <Route path="pets/:id" element={<PetDetails />} />
           <Route path="grooming" element={<Grooming />} />
           <Route path="blog" element={<Blog />} />
@@ -65,6 +68,7 @@ function App() {
           <Route path="products" element={<ProductsAdmin />} />
           <Route path="doctors" element={<DoctorsAdmin />} />
           <Route path="blog" element={<BlogAdmin />} />
+          <Route path="adoption-requests" element={<AdoptionRequests />} />
         </Route>
       </Routes>
     </>

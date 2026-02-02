@@ -31,7 +31,7 @@ const Adoption = () => {
     useEffect(() => {
         let result = pets;
         if (selectedSpecies !== 'All') {
-            result = result.filter(pet => pet.species === selectedSpecies);
+            result = result.filter(pet => (pet.type || pet.species) === selectedSpecies);
         }
         if (searchTerm) {
             result = result.filter(pet =>
@@ -42,6 +42,12 @@ const Adoption = () => {
         setFilteredPets(result);
     }, [selectedSpecies, searchTerm, pets]);
 
+    const getTraits = (traits) => {
+        if (!traits) return [];
+        if (Array.isArray(traits)) return traits;
+        return typeof traits === 'string' ? traits.split(',').map(t => t.trim()) : [];
+    };
+
     return (
         <div className="max-w-7xl mx-auto px-4 py-20">
             {/* Header */}
@@ -50,9 +56,14 @@ const Adoption = () => {
                 <h1 className="text-5xl md:text-7xl font-black text-gray-900 mb-6 tracking-tight leading-[1.1]">
                     Adoption Center
                 </h1>
-                <p className="text-xl text-gray-500 font-medium leading-relaxed italic">
+                <p className="text-xl text-gray-500 font-medium leading-relaxed italic mb-10">
                     "Every pet deserves a loving home, and every home deserves a loving pet."
                 </p>
+                <Link to="/list-pet">
+                    <Button size="lg" className="rounded-2xl px-12 py-6 text-lg font-black shadow-xl shadow-primary/20 hover:scale-105 transition-transform">
+                        List Your Pet for Adoption <ArrowRight size={22} className="ml-2" />
+                    </Button>
+                </Link>
             </header>
 
             {/* Filters */}
@@ -63,8 +74,8 @@ const Adoption = () => {
                             key={species}
                             onClick={() => setSelectedSpecies(species)}
                             className={`flex-1 md:flex-none px-8 py-3 rounded-xl font-black transition-all ${selectedSpecies === species
-                                    ? 'bg-white text-gray-900 shadow-lg'
-                                    : 'text-gray-500 hover:text-gray-700'
+                                ? 'bg-white text-gray-900 shadow-lg'
+                                : 'text-gray-500 hover:text-gray-700'
                                 }`}
                         >
                             {species === 'All' && <span className="flex items-center gap-2">All Pets</span>}
@@ -122,7 +133,7 @@ const Adoption = () => {
                                 </div>
                                 <div className="p-8 bg-white flex-grow flex flex-col justify-between">
                                     <div className="flex gap-2 mb-6 flex-wrap">
-                                        {pet.traits.slice(0, 2).map(trait => (
+                                        {getTraits(pet.traits).slice(0, 2).map(trait => (
                                             <span key={trait} className="px-3 py-1 bg-gray-100 rounded-lg text-[10px] font-black uppercase tracking-wider text-gray-500">{trait}</span>
                                         ))}
                                     </div>

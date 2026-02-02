@@ -224,10 +224,11 @@ const Home = () => {
             {/* Premium Accessories CTA */}
             <section className="px-4 py-20">
                 <div className="max-w-7xl mx-auto bg-gray-900 rounded-[3.5rem] p-12 md:p-20 text-white relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-1/2 h-full opacity-30 pointer-events-none group-hover:scale-110 transition-transform duration-1000">
-                        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover" />
+                    <div className="absolute top-0 right-0 w-1/2 h-full pointer-events-none group-hover:scale-105 transition-transform duration-1000">
+                        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover object-bottom" />
+                        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-900 to-transparent"></div>
                     </div>
-                    <div className="relative z-10 max-w-xl">
+                    <div className="relative z-10 lg:max-w-[48%]">
                         <Badge variant="playful" className="bg-primary text-white border-none mb-6">New Collection</Badge>
                         <h2 className="text-4xl md:text-6xl font-black mb-8 leading-tight tracking-tight">Luxury <br /><span className="text-primary">Accessories</span> for Your Elite Pet</h2>
                         <p className="text-xl text-gray-400 font-medium mb-10 leading-relaxed italic">
@@ -246,8 +247,11 @@ const Home = () => {
             <section className="px-4 py-12 bg-white">
                 <div className="max-w-7xl mx-auto">
                     <div className="bg-gray-900 rounded-[3rem] p-12 md:p-24 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-1/3 h-full opacity-20 pointer-events-none">
-                            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=400" className="w-full h-full object-cover" />
+                        <div className="absolute top-0 right-0 w-[45%] h-full pointer-events-none">
+                            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=600" className="w-full h-full object-cover" />
+                            <div className="absolute inset-0 bg-gray-900/40"></div>
+                            {/* Gradient mask to make the transition smoother */}
+                            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-gray-900 to-transparent"></div>
                         </div>
 
                         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -256,7 +260,7 @@ const Home = () => {
                                     <Quote size={28} />
                                 </div>
                                 <h2 className="text-4xl md:text-5xl font-black text-white mb-8 tracking-tight">Owners love us. <br /> Pets do too.</h2>
-                                <p className="text-gray-400 text-xl font-medium leading-relaxed italic">
+                                <p className="text-gray-400 text-xl font-medium leading-relaxed italic max-w-[90%]">
                                     "I used to struggle with finding a reliable vet AND quality food.
                                     Pawly made it effortless. The clinic staff is amazing and the delivery is lightning fast!"
                                 </p>
@@ -341,10 +345,10 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Learning Center (Blog Preview) */}
-            <section className="px-4 py-20 bg-gray-50/50">
+            < section className="px-4 py-20 bg-gray-50/50" >
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-6">
                         <div className="text-center md:text-left">
@@ -389,10 +393,10 @@ const Home = () => {
                         )}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Final Meet Doctors CTA */}
-            <section className="px-4 max-w-7xl mx-auto py-12">
+            < section className="px-4 max-w-7xl mx-auto py-12" >
                 <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
                     <h2 className="text-4xl font-black text-gray-900 tracking-tight">Top Veterinary Specialists</h2>
                     <Link to="/clinic">
@@ -402,23 +406,25 @@ const Home = () => {
                     </Link>
                 </div>
 
-                {loading ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {[...Array(2)].map((_, i) => (
-                            <div key={i} className="h-64 bg-gray-100 rounded-[2.5rem] animate-pulse"></div>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {featuredDoctors.map((doctor) => (
-                            <DoctorCard key={doctor.id} doctor={doctor} />
-                        ))}
-                    </div>
-                )}
-            </section>
+                {
+                    loading ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {[...Array(2)].map((_, i) => (
+                                <div key={i} className="h-64 bg-gray-100 rounded-[2.5rem] animate-pulse"></div>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {featuredDoctors.map((doctor) => (
+                                <DoctorCard key={doctor.id} doctor={doctor} />
+                            ))}
+                        </div>
+                    )
+                }
+            </section >
 
             {/* Newsletter / Join */}
-            <section className="px-4 py-20 bg-primary/5 -mx-4 sm:-mx-6 lg:-mx-8">
+            < section className="px-4 py-20 bg-primary/5 -mx-4 sm:-mx-6 lg:-mx-8" >
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-black mb-6">Stay ahead on pet wellness.</h2>
                     <p className="text-gray-500 text-lg mb-10 font-medium">Join 20k+ pet owners who receive our weekly nutrition tips and clinic updates.</p>
@@ -431,8 +437,8 @@ const Home = () => {
                         <Button className="py-4 shadow-xl shadow-primary/20">Subscribe</Button>
                     </form>
                 </div>
-            </section>
-        </div>
+            </section >
+        </div >
     );
 };
 

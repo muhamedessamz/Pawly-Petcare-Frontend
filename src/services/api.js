@@ -63,10 +63,29 @@ export const api = {
       const response = await fetch(`${API_URL}/pets`);
       return handleResponse(response);
     },
+    getPending: async () => {
+      const response = await fetch(`${API_URL}/pets/pending`);
+      return handleResponse(response);
+    },
     getById: async (id) => {
       const response = await fetch(`${API_URL}/pets/${id}`);
       return handleResponse(response);
     },
+    create: async (data) => {
+      const response = await fetch(`${API_URL}/pets`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      return handleResponse(response);
+    },
+    approve: async (id) => {
+      const response = await fetch(`${API_URL}/pets/approve/${id}`, {
+        method: 'POST'
+      });
+      if (!response.ok) throw new Error('Failed to approve');
+      return true;
+    }
   },
   blog: {
     getAll: async () => {
