@@ -76,7 +76,7 @@ const BookAppointment = () => {
     };
 
     return (
-        <div className="max-w-4xl mx-auto py-12 px-4">
+        <div className="max-w-6xl mx-auto py-12 px-4">
             <Link to="/clinic" className="inline-flex items-center text-sm font-bold text-gray-400 hover:text-health mb-12 group">
                 <ArrowLeft size={18} className="mr-2 group-hover:-translate-x-1 transition-transform" /> Cancel & Return
             </Link>

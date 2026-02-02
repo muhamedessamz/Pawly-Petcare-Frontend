@@ -454,8 +454,8 @@ const Home = () => {
             </section >
 
             {/* Final Meet Doctors CTA */}
-            < section className="px-4 max-w-7xl mx-auto py-12" >
-                <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+            <section className="px-4 max-w-7xl mx-auto pt-6 md:pt-12 pb-12">
+                <div className="flex flex-col md:flex-row justify-center md:justify-between items-center mb-12 gap-6 text-center md:text-left">
                     <h2 className="text-4xl font-black text-gray-900 tracking-tight">Top Veterinary Specialists</h2>
                     <Link to="/clinic">
                         <Button variant="ghost" className="text-health hover:bg-health/5 font-bold group">
@@ -482,7 +482,7 @@ const Home = () => {
             </section >
 
             {/* Newsletter / Join */}
-            <section className="px-4 py-20 bg-gray-50">
+            <section className="px-4 py-8 bg-gray-50">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-black mb-6">Stay ahead on pet wellness.</h2>
                     <p className="text-gray-500 text-lg mb-10 font-medium">Join 20k+ pet owners who receive our weekly nutrition tips and clinic updates.</p>

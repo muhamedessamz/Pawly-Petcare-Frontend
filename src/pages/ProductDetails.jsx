@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { api } from '../services/api';
+import { api, getImageUrl } from '../services/api';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import { Star, Truck, ShieldCheck, ArrowLeft, Heart, Share2, Info } from 'lucide-react';
@@ -46,12 +46,12 @@ const ProductDetails = () => {
                 <div className="relative">
                     <div className="sticky top-32 space-y-4">
                         <div className="bg-white rounded-[3rem] overflow-hidden shadow-2xl shadow-gray-200/50 border border-gray-100 aspect-square group">
-                            <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                            <img src={getImageUrl(product.image)} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         </div>
                         <div className="grid grid-cols-4 gap-4">
                             {[...Array(4)].map((_, i) => (
                                 <div key={i} className={`aspect-square rounded-2xl border-2 overflow-hidden cursor-pointer transition-all ${i === 0 ? 'border-primary' : 'border-transparent hover:border-gray-200'}`}>
-                                    <img src={product.image} className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity" />
+                                    <img src={getImageUrl(product.image)} className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity" />
                                 </div>
                             ))}
                         </div>

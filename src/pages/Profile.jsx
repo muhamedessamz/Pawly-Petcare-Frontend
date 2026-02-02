@@ -41,7 +41,7 @@ const Profile = () => {
                     profilePictureUrl: data.profilePictureUrl || ''
                 });
                 if (data.profilePictureUrl) {
-                    setPreviewUrl(`http://localhost:5044${data.profilePictureUrl}`);
+                    setPreviewUrl(`http://pawly-petcare.runasp.net${data.profilePictureUrl}`);
                 }
 
                 // Fetch appointments and orders
@@ -84,7 +84,7 @@ const Profile = () => {
             alert('Profile updated successfully!');
 
             if (updatedProfile.profilePictureUrl) {
-                setPreviewUrl(`http://localhost:5044${updatedProfile.profilePictureUrl}`);
+                setPreviewUrl(`http://pawly-petcare.runasp.net${updatedProfile.profilePictureUrl}`);
             }
         } catch (err) {
             console.error(err);

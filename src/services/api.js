@@ -1,4 +1,14 @@
-const API_URL = 'http://localhost:5044/api';
+const API_URL = 'http://pawly-petcare.runasp.net/api';
+const SERVER_URL = 'http://pawly-petcare.runasp.net';
+
+// Helper function to get full image URL
+export const getImageUrl = (imagePath) => {
+  if (!imagePath) return null;
+  // If it's already a full URL, return as is
+  if (imagePath.startsWith('http')) return imagePath;
+  // Otherwise, prepend server URL
+  return SERVER_URL + imagePath;
+};
 
 const handleResponse = async (response) => {
   if (!response.ok) {
