@@ -1,5 +1,5 @@
-const API_URL = 'http://pawly-petcare.runasp.net/api';
-const SERVER_URL = 'http://pawly-petcare.runasp.net';
+const API_URL = 'https://pawly-petcare.runasp.net/api';
+const SERVER_URL = 'https://pawly-petcare.runasp.net';
 
 // Helper function to get full image URL
 export const getImageUrl = (imagePath) => {
