@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Package, Stethoscope, Users, Settings, LogOut, BookOpen, Heart } from 'lucide-react';
+import { LayoutDashboard, Package, Stethoscope, Users, Settings, LogOut, BookOpen, Heart, Calendar } from 'lucide-react';
 
 const AdminLayout = () => {
     const location = useLocation();
@@ -37,6 +37,10 @@ const AdminLayout = () => {
 
                     <Link to="/admin/doctors" className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-colors ${isActive('/admin/doctors')}`}>
                         <Stethoscope size={20} /> Doctors
+                    </Link>
+
+                    <Link to="/admin/appointments" className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-colors ${isActive('/admin/appointments')}`}>
+                        <Calendar size={20} /> Appointments
                     </Link>
 
                     <Link to="/admin/blog" className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-colors ${isActive('/admin/blog')}`}>

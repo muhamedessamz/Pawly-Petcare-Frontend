@@ -55,7 +55,7 @@ const Adoption = () => {
                 <p className="text-xl text-gray-500 font-medium leading-relaxed italic mb-10">
                     "Every pet deserves a loving home, and every home deserves a loving pet."
                 </p>
-                <Link to="/list-pet">
+                <Link to="/adoption/offer">
                     <Button size="lg" className="rounded-2xl px-12 py-6 text-lg font-black shadow-xl shadow-primary/20 hover:scale-105 transition-transform">
                         List Your Pet for Adoption <ArrowRight size={22} className="ml-2" />
                     </Button>
@@ -164,8 +164,10 @@ const Adoption = () => {
                             Join our volunteer network or donate to help provide food and medical care for our rescue pets.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <Button size="lg" className="rounded-2xl px-10 font-black">Become Volunteer</Button>
-                            <Button variant="outline" size="lg" className="rounded-2xl px-10 border-white/10 text-white hover:bg-white/10">Make a Donation</Button>
+                            <Link to="/adoption/volunteer">
+                                <Button size="lg" className="rounded-2xl px-10 font-black w-full sm:w-auto">Become Volunteer</Button>
+                            </Link>
+                            <Button variant="outline" size="lg" className="rounded-2xl px-10 border-white/10 text-white hover:bg-white/10 w-full sm:w-auto">Make a Donation</Button>
                         </div>
                     </div>
                     <div className="hidden lg:flex items-center justify-center">

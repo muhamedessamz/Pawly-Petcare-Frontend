@@ -8,7 +8,7 @@ import { User, Mail, Phone, MapPin, Camera, Save, LogOut, Calendar, Package, Clo
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-    const { user, logout, updateUser } = useAuth();
+    const { user, logout, updateUser, loading: authLoading } = useAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [activeTab, setActiveTab] = useState('profile');
@@ -25,6 +25,8 @@ const Profile = () => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
+        if (authLoading) return;
+
         if (!user) {
             navigate('/login');
             return;
@@ -42,6 +44,9 @@ const Profile = () => {
                 });
                 if (data.profilePictureUrl) {
                     setPreviewUrl(`http://pawly-petcare.runasp.net${data.profilePictureUrl}`);
+                } else if (user.profilePictureUrl) {
+                    // Fallback to user data from localStorage
+                    setPreviewUrl(`http://pawly-petcare.runasp.net${user.profilePictureUrl}`);
                 }
 
                 // Fetch appointments and orders
@@ -57,7 +62,8 @@ const Profile = () => {
         };
 
         fetchData();
-    }, [user, navigate]);
+    }, [user, navigate, authLoading]);
+
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];

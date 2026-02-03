@@ -11,7 +11,7 @@ import { Calendar, User, Info, CheckCircle2, ArrowLeft, Clock } from 'lucide-rea
 const BookAppointment = () => {
     const { doctorId } = useParams();
     const navigate = useNavigate();
-    const { user } = useAuth();
+    const { user, loading: authLoading } = useAuth();
     const [doctor, setDoctor] = useState(null);
     const [formData, setFormData] = useState({
         ownerName: '',
@@ -26,17 +26,19 @@ const BookAppointment = () => {
         if (doctorId) {
             const fetchDoctor = async () => {
                 try {
-                    const data = await api.doctors.getById(doctorId).catch(() => null);
-                    if (data) {
-                        setDoctor(data);
-                    } else {
-                        // Fallback to static data
-                        const staticDoc = doctorsData.find(d => d.id === parseInt(doctorId));
+                    // Check static data first for mock doctors (ID < 100)
+                    const staticDoc = doctorsData.find(d => d.id === parseInt(doctorId));
+                    if (staticDoc) {
                         setDoctor(staticDoc);
+                    } else {
+                        // Only call API for real doctors (ID >= 100)
+                        const data = await api.doctors.getById(doctorId).catch(() => null);
+                        if (data) {
+                            setDoctor(data);
+                        }
                     }
                 } catch (error) {
-                    const staticDoc = doctorsData.find(d => d.id === parseInt(doctorId));
-                    setDoctor(staticDoc);
+                    console.error('Error fetching doctor:', error);
                 }
             };
             fetchDoctor();
@@ -44,10 +46,12 @@ const BookAppointment = () => {
     }, [doctorId]);
 
     useEffect(() => {
+        if (authLoading) return;
         if (!user) {
             navigate('/login');
         }
-    }, [user, navigate]);
+    }, [user, navigate, authLoading]);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();

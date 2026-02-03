@@ -19,6 +19,8 @@ import Checkout from './pages/Checkout';
 import Adoption from './pages/Adoption';
 import PetDetails from './pages/PetDetails';
 import AdoptionForm from './pages/AdoptionForm';
+import OfferPet from './pages/OfferPet';
+import Volunteer from './pages/Volunteer';
 import './App.css';
 
 import AdminLayout from './components/layout/AdminLayout';
@@ -32,6 +34,7 @@ import ResetPassword from './pages/ResetPassword';
 import Profile from './pages/Profile';
 import ListPet from './pages/ListPet';
 import AdoptionRequests from './pages/admin/AdoptionRequests';
+import AppointmentsAdmin from './pages/admin/AppointmentsAdmin';
 
 function App() {
   return (
@@ -47,6 +50,8 @@ function App() {
           <Route path="adoption" element={<Adoption />} />
           <Route path="list-pet" element={<ListPet />} />
           <Route path="pets/:id" element={<PetDetails />} />
+          <Route path="adoption/offer" element={<OfferPet />} />
+          <Route path="adoption/volunteer" element={<Volunteer />} />
           <Route path="adopt/:id" element={<AdoptionForm />} />
           <Route path="grooming" element={<Grooming />} />
           <Route path="blog" element={<Blog />} />
@@ -69,6 +74,7 @@ function App() {
           <Route index element={<AdminDashboard />} />
           <Route path="products" element={<ProductsAdmin />} />
           <Route path="doctors" element={<DoctorsAdmin />} />
+          <Route path="appointments" element={<AppointmentsAdmin />} />
           <Route path="blog" element={<BlogAdmin />} />
           <Route path="adoption-requests" element={<AdoptionRequests />} />
         </Route>

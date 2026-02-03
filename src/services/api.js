@@ -196,6 +196,18 @@ export const api = {
     getMy: async (email) => {
       const response = await fetch(`${API_URL}/appointment/my-appointments?email=${email}`);
       return handleResponse(response);
+    },
+    getAll: async () => {
+      const response = await fetch(`${API_URL}/appointment`);
+      return handleResponse(response);
+    },
+    updateStatus: async (id, status) => {
+      const response = await fetch(`${API_URL}/appointment/${id}/status`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status })
+      });
+      return handleResponse(response);
     }
   },
   orders: {

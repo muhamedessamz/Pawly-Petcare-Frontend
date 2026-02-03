@@ -60,12 +60,12 @@ const Clinic = () => {
                         />
                     </div>
 
-                    <div className="max-w-2xl">
+                    <div className="max-w-2xl text-center md:text-left">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-health/10 text-health text-xs font-black uppercase tracking-widest mb-6">
                             <Sparkles size={14} /> <span>Trusted Vet Network</span>
                         </div>
                         <h1 className="text-5xl font-black text-gray-900 mb-6 leading-tight">World-Class Care For Your Best Friend.</h1>
-                        <p className="text-xl text-gray-500 font-medium mb-10 leading-relaxed">
+                        <p className="text-xl text-gray-500 font-medium mb-10 leading-relaxed mx-auto md:mx-0">
                             Specialized veterinarians, modern equipment, and 24/7 care.
                             Find the perfect specialist for your pet's needs.
                         </p>

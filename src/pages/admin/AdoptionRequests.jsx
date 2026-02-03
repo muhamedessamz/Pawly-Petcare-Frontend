@@ -101,7 +101,15 @@ const AdoptionRequests = () => {
                                             </div>
                                         </div>
 
-                                        <p className="text-gray-500 text-sm line-clamp-2 italic font-medium">"{pet.description}"</p>
+                                        <p className="text-gray-500 text-sm line-clamp-2 italic font-medium mb-4">"{pet.description}"</p>
+
+                                        <div className="bg-gray-50 p-4 rounded-xl space-y-2">
+                                            <p className="text-xs font-black uppercase text-gray-400 tracking-widest">Owner Contact</p>
+                                            <div className="flex flex-col gap-1 text-sm font-bold text-gray-700">
+                                                <span>{pet.ownerEmail || 'No email provided'}</span>
+                                                <span>{pet.ownerPhone || 'No phone provided'}</span>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div className="mt-8 pt-6 border-t border-gray-50 flex gap-4">
