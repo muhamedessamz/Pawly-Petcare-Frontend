@@ -6,22 +6,27 @@ import Badge from '../components/ui/Badge';
 import { Card } from '../components/ui/Card';
 import { ArrowLeft, Heart, Share2, ClipboardCheck, Info, MapPin, Bone, CheckCircle2 } from 'lucide-react';
 
-import petsData from '../services/mockData/pets.json';
-
 const PetDetails = () => {
     const { id } = useParams();
     const [pet, setPet] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Mock fetching from local data
-        setLoading(true);
-        const timer = setTimeout(() => {
-            const foundPet = petsData.find(p => p.id === parseInt(id));
-            setPet(foundPet);
-            setLoading(false);
-        }, 500);
-        return () => clearTimeout(timer);
+        const fetchPetDetails = async () => {
+            try {
+                setLoading(true);
+                const data = await api.pets.getById(id);
+                setPet(data);
+            } catch (error) {
+                console.error('Failed to fetch pet details:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (id) {
+            fetchPetDetails();
+        }
     }, [id]);
 
     if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="h-12 w-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div></div>;
@@ -30,6 +35,9 @@ const PetDetails = () => {
         <h2 className="text-3xl font-black mb-4">Pet Not Found</h2>
         <Link to="/adoption"><Button>Back to Adoption Center</Button></Link>
     </div>;
+
+    // Helper to process traits (string from DB to array)
+    const traitsList = pet.traits ? (typeof pet.traits === 'string' ? pet.traits.split(',').map(t => t.trim()) : pet.traits) : [];
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-12 lg:py-20">
@@ -40,8 +48,15 @@ const PetDetails = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
                 {/* Images & Quick Info */}
                 <div className="lg:col-span-7 space-y-10">
-                    <div className="aspect-[4/3] rounded-[4rem] overflow-hidden shadow-2xl relative group">
-                        <img src={pet.image} alt={pet.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]" />
+                    <div className="aspect-[4/3] rounded-[4rem] overflow-hidden shadow-2xl relative group bg-gray-100 flex items-center justify-center">
+                        {pet.image ? (
+                            <img src={pet.image} alt={pet.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]" />
+                        ) : (
+                            <div className="text-gray-300 flex flex-col items-center">
+                                <Bone size={64} />
+                                <span className="mt-2 font-bold">No Image</span>
+                            </div>
+                        )}
                         <div className="absolute top-8 right-8 flex flex-col gap-4">
                             <button className="h-14 w-14 bg-white/90 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-xl hover:bg-primary hover:text-white transition-all">
                                 <Heart size={24} />
@@ -54,10 +69,10 @@ const PetDetails = () => {
 
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
                         {[
-                            { label: 'Breed', value: pet.breed },
-                            { label: 'Age', value: pet.age },
-                            { label: 'Gender', value: pet.gender },
-                            { label: 'Size', value: pet.size },
+                            { label: 'Breed', value: pet.breed || 'Unknown' },
+                            { label: 'Age', value: `${pet.age} Years` },
+                            { label: 'Gender', value: pet.gender || 'Unknown' },
+                            { label: 'Size', value: pet.size || 'Unknown' },
                         ].map((spec) => (
                             <div key={spec.label} className="bg-gray-50 p-6 rounded-3xl border border-gray-100 hover:bg-white hover:shadow-xl transition-all group">
                                 <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 group-hover:text-primary">{spec.label}</p>
@@ -72,27 +87,29 @@ const PetDetails = () => {
                     <Badge variant="playful" className="mb-6 w-fit h-10 px-6 bg-primary/10 text-primary border-none">Ready for Adoption</Badge>
                     <h1 className="text-6xl md:text-7xl font-black text-gray-900 mb-4 tracking-tight leading-none">{pet.name}</h1>
                     <div className="flex items-center gap-2 text-gray-500 font-bold mb-10 italic">
-                        <MapPin size={18} /> Currently at Brooklyn Shelter
+                        <MapPin size={18} /> {pet.location || 'Unknown Location'}
                     </div>
 
                     <div className="p-10 bg-gray-50 rounded-[3rem] border border-gray-100 mb-10 relative overflow-hidden group hover:bg-white hover:shadow-2xl transition-all duration-500">
                         <div className="absolute -top-10 -right-10 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity">
                             <Bone size={200} />
                         </div>
-                        <h2 className="text-2xl font-black mb-6 text-gray-900">My Story</h2>
+                        <h2 className="text-2xl font-black mb-6 text-gray-900">About {pet.name}</h2>
                         <p className="text-xl text-gray-600 font-medium leading-[1.8] relative z-10">
-                            {pet.story}
+                            {pet.description || "No description provided."}
                         </p>
                     </div>
 
                     <div className="space-y-6 mb-12">
                         <h3 className="font-black uppercase tracking-widest text-xs text-gray-400">Personal Traits</h3>
                         <div className="flex flex-wrap gap-3">
-                            {pet.traits.map(trait => (
-                                <Badge key={trait} className="bg-white border-gray-100 py-3 px-6 rounded-2xl shadow-sm text-gray-700 font-bold hover:scale-110 transition-transform">
+                            {traitsList.length > 0 ? traitsList.map((trait, index) => (
+                                <Badge key={index} className="bg-white border-gray-100 py-3 px-6 rounded-2xl shadow-sm text-gray-700 font-bold hover:scale-110 transition-transform">
                                     <CheckCircle2 size={16} className="text-health mr-2" /> {trait}
                                 </Badge>
-                            ))}
+                            )) : (
+                                <span className="text-gray-400 italic">No specific traits listed.</span>
+                            )}
                         </div>
                     </div>
 

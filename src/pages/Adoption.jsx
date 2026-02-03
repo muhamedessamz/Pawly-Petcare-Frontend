@@ -4,25 +4,31 @@ import { api } from '../services/api';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import { Card } from '../components/ui/Card';
-import { Search, Filter, Heart, ArrowRight, Dog, Cat, Info, MapPin } from 'lucide-react';
-
-import petsData from '../services/mockData/pets.json';
+import { Search, Filter, Heart, ArrowRight, Dog, Cat, Info, MapPin, PawPrint } from 'lucide-react';
 
 const Adoption = () => {
-    const [pets, setPets] = useState(petsData);
-    const [filteredPets, setFilteredPets] = useState(petsData);
-    const [loading, setLoading] = useState(false);
+    const [pets, setPets] = useState([]);
+    const [filteredPets, setFilteredPets] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [selectedSpecies, setSelectedSpecies] = useState('All');
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        // Mock loading effect
-        setLoading(true);
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 500);
-        return () => clearTimeout(timer);
+        fetchPets();
     }, []);
+
+    const fetchPets = async () => {
+        try {
+            setLoading(true);
+            const data = await api.pets.getAll();
+            setPets(data || []);
+            setFilteredPets(data || []);
+        } catch (error) {
+            console.error('Failed to fetch pets:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         let result = pets;
@@ -106,14 +112,18 @@ const Adoption = () => {
                     {filteredPets.map((pet) => (
                         <Link to={`/pets/${pet.id}`} key={pet.id} className="group">
                             <Card className="rounded-[3rem] border-gray-100 overflow-hidden h-full flex flex-col hover:shadow-2xl transition-all duration-700 relative">
-                                <div className="aspect-[4/5] relative overflow-hidden">
-                                    <img
-                                        src={pet.image}
-                                        alt={pet.name}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                                    />
+                                <div className="aspect-[4/5] relative overflow-hidden bg-gray-100 flex items-center justify-center">
+                                    {pet.image ? (
+                                        <img
+                                            src={pet.image}
+                                            alt={pet.name}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                                        />
+                                    ) : (
+                                        <PawPrint size={64} className="text-gray-300" />
+                                    )}
                                     <div className="absolute top-6 left-6">
-                                        <Badge variant="playful" className="bg-white/90 backdrop-blur-sm border-none shadow-sm text-gray-900">{pet.gender}</Badge>
+                                        <Badge variant="playful" className="bg-white/90 backdrop-blur-sm border-none shadow-sm text-gray-900">{pet.gender || 'Unknown'}</Badge>
                                     </div>
                                     <div className="absolute top-6 right-6">
                                         <button className="h-12 w-12 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center text-white hover:bg-white hover:text-red-500 transition-all">
@@ -125,7 +135,7 @@ const Adoption = () => {
                                     <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/80 via-black/20 to-transparent text-white translate-y-4 group-hover:translate-y-0 transition-transform">
                                         <p className="text-xs font-black uppercase tracking-[0.2em] mb-2 text-primary">Needs a Home</p>
                                         <h3 className="text-3xl font-black mb-1">{pet.name}</h3>
-                                        <p className="font-bold text-gray-300 italic">{pet.breed} • {pet.age}</p>
+                                        <p className="font-bold text-gray-300 italic">{pet.breed} • {pet.age} Years</p>
                                     </div>
                                 </div>
                                 <div className="p-8 bg-white flex-grow flex flex-col justify-between">
@@ -134,8 +144,8 @@ const Adoption = () => {
                                             <span key={trait} className="px-3 py-1 bg-gray-100 rounded-lg text-[10px] font-black uppercase tracking-wider text-gray-500">{trait}</span>
                                         ))}
                                     </div>
-                                    <Button variant="outline" className="w-full rounded-2xl border-gray-100 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all font-black py-4">
-                                        View Story <ArrowRight size={18} className="ml-2 group-hover:translate-x-2 transition-transform" />
+                                    <Button className="w-full rounded-full bg-gray-50 text-gray-900 hover:bg-primary hover:text-white transition-all font-black py-3 shadow-sm hover:shadow-xl hover:-translate-y-1">
+                                        View Story <ArrowRight size={18} className="ml-2" />
                                     </Button>
                                 </div>
                             </Card>

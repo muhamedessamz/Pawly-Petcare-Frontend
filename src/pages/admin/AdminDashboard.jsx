@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ShoppingBag, Users, Activity, DollarSign } from 'lucide-react';
+import { ShoppingBag, Users, Activity, DollarSign, Heart } from 'lucide-react';
 import { api } from '../../services/api';
 
 const StatCard = ({ title, value, icon: Icon, color }) => (
@@ -19,7 +19,8 @@ const AdminDashboard = () => {
         products: 0,
         doctors: 0,
         users: 0,
-        orders: 0
+        orders: 0,
+        pendingRequests: 0
     });
 
     useEffect(() => {
@@ -35,12 +36,14 @@ const AdminDashboard = () => {
                 // Fallback for now using basic gets if stats endpoint not in api.js yet
                 const products = await api.products.getAll();
                 const doctors = await api.doctors.getAll();
+                const pendingPets = await api.pets.getPending();
 
                 setStats({
                     products: products.length,
                     doctors: doctors.length,
                     users: 245, // Mock
-                    orders: 12   // Mock
+                    orders: 12,   // Mock
+                    pendingRequests: pendingPets.length
                 });
             } catch (e) {
                 console.error("Failed to load stats", e);
@@ -61,6 +64,7 @@ const AdminDashboard = () => {
                 <StatCard title="Total Doctors" value={stats.doctors} icon={Activity} color="bg-health" />
                 <StatCard title="Total Users" value={stats.users} icon={Users} color="bg-playful" />
                 <StatCard title="Total Orders" value={stats.orders} icon={DollarSign} color="bg-yellow-500" />
+                <StatCard title="Pending Adoption Requests" value={stats.pendingRequests} icon={Heart} color="bg-orange-500" />
             </div>
 
             {/* Recent Activity or Charts could go here */}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { api } from '../services/api';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
@@ -30,11 +31,15 @@ const Volunteer = () => {
         e.preventDefault();
         setLoading(true);
 
-        // Simulate API call
-        setTimeout(() => {
-            setLoading(false);
+        try {
+            await api.volunteers.create(formData);
             setSubmitted(true);
-        }, 1500);
+        } catch (error) {
+            console.error("Failed to submit volunteer application", error);
+            alert("Failed to submit application. Please try again.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     if (submitted) {

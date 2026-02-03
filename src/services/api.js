@@ -95,6 +95,10 @@ export const api = {
       });
       if (!response.ok) throw new Error('Failed to approve');
       return true;
+    },
+    getMy: async (email) => {
+      const response = await fetch(`${API_URL}/pets/my-pets?email=${email}`);
+      return handleResponse(response);
     }
   },
   blog: {
@@ -230,6 +234,24 @@ export const api = {
   admin: {
     getStats: async () => {
       const response = await fetch(`${API_URL}/admin/stats`);
+      return handleResponse(response);
+    }
+  },
+  volunteers: {
+    create: async (data) => {
+      const response = await fetch(`${API_URL}/volunteer`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      return handleResponse(response);
+    },
+    getAll: async () => {
+      const response = await fetch(`${API_URL}/volunteer`);
+      return handleResponse(response);
+    },
+    getMy: async (email) => {
+      const response = await fetch(`${API_URL}/volunteer/my-volunteers?email=${email}`);
       return handleResponse(response);
     }
   }

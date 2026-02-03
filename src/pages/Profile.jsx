@@ -4,14 +4,14 @@ import { api } from '../services/api';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import { Card } from '../components/ui/Card';
-import { User, Mail, Phone, MapPin, Camera, Save, LogOut, Calendar, Package, Clock, CheckCircle, XCircle } from 'lucide-react';
+import { User, Mail, Phone, MapPin, Camera, Save, LogOut, Calendar, Package, Clock, CheckCircle, XCircle, Heart, Hand } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
     const { user, logout, updateUser, loading: authLoading } = useAuth();
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
-    const [activeTab, setActiveTab] = useState('profile');
+    const [myPets, setMyPets] = useState([]);
+    const [myVolunteers, setMyVolunteers] = useState([]);
     const [profile, setProfile] = useState({
         name: '',
         username: '',
@@ -19,10 +19,12 @@ const Profile = () => {
         address: '',
         profilePictureUrl: ''
     });
-    const [imageFile, setImageFile] = useState(null);
-    const [previewUrl, setPreviewUrl] = useState('');
+    const [previewUrl, setPreviewUrl] = useState(null);
     const [appointments, setAppointments] = useState([]);
     const [orders, setOrders] = useState([]);
+    const [imageFile, setImageFile] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [activeTab, setActiveTab] = useState('profile');
 
     useEffect(() => {
         if (authLoading) return;
@@ -45,24 +47,26 @@ const Profile = () => {
                 if (data.profilePictureUrl) {
                     setPreviewUrl(`http://pawly-petcare.runasp.net${data.profilePictureUrl}`);
                 } else if (user.profilePictureUrl) {
-                    // Fallback to user data from localStorage
                     setPreviewUrl(`http://pawly-petcare.runasp.net${user.profilePictureUrl}`);
                 }
 
-                // Fetch appointments and orders
-                const [appointmentsData, ordersData] = await Promise.all([
+                const [appointmentsData, ordersData, petsData, volunteersData] = await Promise.all([
                     api.appointments.getMy(user.email),
-                    api.orders.getMy(user.email)
+                    api.orders.getMy(user.email),
+                    api.pets.getMy(user.email),
+                    api.volunteers.getMy(user.email)
                 ]);
                 setAppointments(appointmentsData);
                 setOrders(ordersData);
+                setMyPets(petsData);
+                setMyVolunteers(volunteersData);
             } catch (err) {
                 console.error("Failed to fetch data", err);
             }
         };
 
         fetchData();
-    }, [user, navigate, authLoading]);
+    }, [user?.email, navigate, authLoading]);
 
 
     const handleImageChange = (e) => {
@@ -104,11 +108,14 @@ const Profile = () => {
         const styles = {
             Pending: 'bg-yellow-100 text-yellow-800',
             Confirmed: 'bg-blue-100 text-blue-800',
-            Completed: 'bg-blue-100 text-blue-800',
+            Completed: 'bg-green-100 text-green-800',
             Cancelled: 'bg-red-100 text-red-800',
             Processing: 'bg-blue-100 text-blue-800',
             Shipped: 'bg-purple-100 text-purple-800',
-            Delivered: 'bg-blue-100 text-blue-800'
+            Delivered: 'bg-green-100 text-green-800',
+            PendingApproval: 'bg-orange-100 text-orange-800',
+            Approved: 'bg-green-100 text-green-800',
+            Rejected: 'bg-red-100 text-red-800'
         };
         return (
             <span className={`px-3 py-1 rounded-full text-xs font-bold ${styles[status] || 'bg-gray-100 text-gray-800'}`}>
@@ -147,6 +154,7 @@ const Profile = () => {
 
                         <h2 className="text-xl font-bold">{user.name}</h2>
                         <p className="text-primary text-sm font-bold">@{profile.username || user.username || 'username'}</p>
+                        <p className="text-xs text-gray-400 mt-1">{user.email}</p>
 
                         <div className="mt-6 pt-6 border-t border-gray-100 space-y-2">
                             <Button
@@ -169,6 +177,20 @@ const Profile = () => {
                                 className="w-full justify-start"
                             >
                                 <Package size={16} className="mr-2" /> Orders
+                            </Button>
+                            <Button
+                                variant={activeTab === 'mylistings' ? 'primary' : 'ghost'}
+                                onClick={() => setActiveTab('mylistings')}
+                                className="w-full justify-start"
+                            >
+                                <Heart size={16} className="mr-2" /> My Listings
+                            </Button>
+                            <Button
+                                variant={activeTab === 'myvolunteers' ? 'primary' : 'ghost'}
+                                onClick={() => setActiveTab('myvolunteers')}
+                                className="w-full justify-start"
+                            >
+                                <Hand size={16} className="mr-2" /> Volunteer History
                             </Button>
                             <Button variant="outline" onClick={logout} className="w-full text-red-500 border-red-100 hover:bg-red-50 justify-start">
                                 <LogOut size={16} className="mr-2" /> Sign Out
@@ -322,6 +344,79 @@ const Profile = () => {
                                             <div className="pt-4 border-t border-gray-100 flex justify-between items-center">
                                                 <span className="font-black text-gray-900">Total</span>
                                                 <span className="text-2xl font-black text-primary">${order.totalAmount.toFixed(2)}</span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </Card>
+                    )}
+
+                    {activeTab === 'mylistings' && (
+                        <Card className="p-8">
+                            <h2 className="text-2xl font-black mb-6 flex items-center gap-3">
+                                <Heart className="text-playful" size={28} />
+                                My Adoption Listings
+                            </h2>
+
+
+
+                            {myPets.length === 0 ? (
+                                <div className="text-center py-12 text-gray-400">
+                                    <Heart size={48} className="mx-auto mb-4 opacity-50" />
+                                    <p className="font-bold">You haven't listed any pets for adoption yet.</p>
+                                    <Button variant="outline" className="mt-4" onClick={() => navigate('/adoption/offer')}>List a Pet</Button>
+                                </div>
+                            ) : (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {myPets.map((pet) => (
+                                        <div key={pet.id} className="border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow group">
+                                            <div className="h-48 relative">
+                                                <img src={pet.image} alt={pet.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                                <div className="absolute top-2 right-2">
+                                                    {getStatusBadge(pet.status)}
+                                                </div>
+                                            </div>
+                                            <div className="p-4">
+                                                <h3 className="font-black text-lg">{pet.name}</h3>
+                                                <p className="text-sm text-gray-500 font-bold mb-2">{pet.type} • {pet.breed}</p>
+                                                <p className="text-xs text-gray-400 font-medium line-clamp-2">{pet.description}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </Card>
+                    )}
+
+                    {activeTab === 'myvolunteers' && (
+                        <Card className="p-8">
+                            <h2 className="text-2xl font-black mb-6 flex items-center gap-3">
+                                <Hand className="text-primary" size={28} />
+                                Volunteer History
+                            </h2>
+                            {myVolunteers.length === 0 ? (
+                                <div className="text-center py-12 text-gray-400">
+                                    <Hand size={48} className="mx-auto mb-4 opacity-50" />
+                                    <p className="font-bold">You haven't applied to volunteer yet.</p>
+                                    <Button variant="outline" className="mt-4" onClick={() => navigate('/adoption/volunteer')}>Apply Now</Button>
+                                </div>
+                            ) : (
+                                <div className="space-y-4">
+                                    {myVolunteers.map((vol) => (
+                                        <div key={vol.id} className="border border-gray-100 rounded-2xl p-6 hover:shadow-md transition-shadow">
+                                            <div className="flex justify-between items-start mb-2">
+                                                <div>
+                                                    <h3 className="font-black text-lg">{vol.interest}</h3>
+                                                    <p className="text-sm text-gray-500">{new Date(vol.createdAt).toLocaleDateString()}</p>
+                                                </div>
+                                                <span className="px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800">
+                                                    Application Sent
+                                                </span>
+                                            </div>
+                                            <div className="mt-2 text-sm text-gray-600">
+                                                <p><span className="font-bold">Availability:</span> {vol.availability}</p>
+                                                {vol.experience && <p className="mt-1"><span className="font-bold">Experience:</span> {vol.experience}</p>}
                                             </div>
                                         </div>
                                     ))}

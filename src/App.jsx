@@ -35,6 +35,7 @@ import Profile from './pages/Profile';
 import ListPet from './pages/ListPet';
 import AdoptionRequests from './pages/admin/AdoptionRequests';
 import AppointmentsAdmin from './pages/admin/AppointmentsAdmin';
+import VolunteersAdmin from './pages/admin/VolunteersAdmin';
 
 function App() {
   return (
@@ -77,6 +78,7 @@ function App() {
           <Route path="appointments" element={<AppointmentsAdmin />} />
           <Route path="blog" element={<BlogAdmin />} />
           <Route path="adoption-requests" element={<AdoptionRequests />} />
+          <Route path="volunteers" element={<VolunteersAdmin />} />
         </Route>
       </Routes>
     </>

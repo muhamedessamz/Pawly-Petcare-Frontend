@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import { api } from '../services/api';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
@@ -9,6 +10,7 @@ import { ArrowLeft, Upload, CheckCircle2, Info, Heart } from 'lucide-react';
 
 const OfferPet = () => {
     const navigate = useNavigate();
+    const { user } = useAuth();
     const [loading, setLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
 
@@ -28,6 +30,16 @@ const OfferPet = () => {
         ownerPhone: ''
     });
 
+    useEffect(() => {
+        if (user) {
+            setFormData(prev => ({
+                ...prev,
+                ownerEmail: user.email || '',
+                ownerPhone: user.phoneNumber || ''
+            }));
+        }
+    }, [user]);
+
     const handleInput = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -42,8 +54,8 @@ const OfferPet = () => {
             // Start with a default generic image if none provided, or validation
             const petData = {
                 ...formData,
-                age: parseInt(formData.age) || 0, // Ensure age is number if backend expects it, though Entity has int Age
-                // Traits is string in backend, so we can pass it directly or format it
+                age: parseInt(formData.age) || 0, // Ensure age is number if backend expects it
+                ownerEmail: user?.email || formData.ownerEmail, // Force user email if logged in
             };
 
             await api.pets.create(petData);
