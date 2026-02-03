@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import { Card } from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
+import { getImageUrl } from '../services/api';
 import { ShoppingBag, Trash2, Plus, Minus, ArrowRight, ShieldCheck, Truck, ShoppingCart, Heart } from 'lucide-react';
 
 const Cart = () => {
@@ -56,7 +57,7 @@ const Cart = () => {
                         <Card key={item.id} className="rounded-[3rem] border-gray-100 p-6 overflow-hidden hover:shadow-2xl transition-all duration-500 group">
                             <div className="flex flex-col sm:flex-row items-center gap-8">
                                 <div className="h-40 w-40 rounded-[2rem] overflow-hidden shadow-xl flex-shrink-0 relative">
-                                    <img src={item.image} alt={item.name} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                    <img src={getImageUrl(item.image)} alt={item.name} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700" />
                                 </div>
 
                                 <div className="flex-1 text-center sm:text-left space-y-2">

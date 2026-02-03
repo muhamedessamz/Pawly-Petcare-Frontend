@@ -35,8 +35,8 @@ const Blog = () => {
         <div className="max-w-7xl mx-auto px-4 py-20 space-y-20">
             <header className="text-center max-w-3xl mx-auto space-y-6">
                 <Badge variant="playful" className="uppercase tracking-widest px-4 py-1">The Pawly Journal</Badge>
-                <h1 className="text-5xl md:text-6xl font-black tracking-tight">Expert Advice for <br /><span className="text-primary">Happy, Healthy Pets</span></h1>
-                <p className="text-xl text-gray-500 font-medium italic leading-relaxed">
+                <h1 className="text-3xl md:text-6xl font-black tracking-tight">Expert Advice for <br /><span className="text-primary">Happy, Healthy Pets</span></h1>
+                <p className="text-lg md:text-xl text-gray-500 font-medium italic leading-relaxed px-4 md:px-0">
                     Discover tips, tricks, and medical insights from our world-class veterinary team.
                 </p>
             </header>
@@ -51,8 +51,8 @@ const Blog = () => {
                                     <Badge variant="playful" className="bg-white/90 backdrop-blur-sm border-none shadow-sm">{post.category}</Badge>
                                 </div>
                             </div>
-                            <div className="p-8 flex flex-col flex-grow">
-                                <div className="flex items-center gap-3 text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">
+                            <div className="p-8 flex flex-col flex-grow text-center">
+                                <div className="flex items-center justify-center gap-3 text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">
                                     <span className="flex items-center gap-1.5"><Calendar size={14} className="text-primary" /> {post.date}</span>
                                     <span className="h-1 w-1 bg-gray-200 rounded-full"></span>
                                     <span className="flex items-center gap-1.5"><User size={14} className="text-primary" /> {post.author}</span>
@@ -63,7 +63,7 @@ const Blog = () => {
                                 <p className="text-gray-600 font-medium mb-8 line-clamp-3 italic">
                                     {post.excerpt}
                                 </p>
-                                <div className="mt-auto inline-flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest hover:gap-4 transition-all">
+                                <div className="mt-auto inline-flex items-center justify-center gap-2 text-primary font-black uppercase text-xs tracking-widest hover:gap-4 transition-all mx-auto">
                                     Read Full Story <ArrowRight size={16} />
                                 </div>
                             </div>
@@ -73,20 +73,20 @@ const Blog = () => {
             </div>
 
             {/* Newsletter Section */}
-            <section className="bg-gray-900 rounded-[3.5rem] p-12 md:p-20 text-white relative overflow-hidden">
+            <section className="bg-gray-900 rounded-[3.5rem] p-8 md:p-20 text-white relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[100px] -mr-32 -mt-32"></div>
-                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div className="space-y-6">
-                        <h2 className="text-4xl font-black tracking-tight leading-tight">Join 50k+ Pet Owners <br />In Our Weekly Newsletter</h2>
+                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <div className="space-y-6 text-center lg:text-left">
+                        <h2 className="text-3xl md:text-4xl font-black tracking-tight leading-tight">Join 50k+ Pet Owners <br className="hidden md:block" />In Our Weekly Newsletter</h2>
                         <p className="text-gray-400 font-medium">Get exclusive health tips, product deals, and cute pet stories delivered to your inbox.</p>
                     </div>
-                    <form className="flex flex-col sm:flex-row gap-4">
+                    <form className="flex flex-col sm:flex-row gap-4 w-full lg:max-w-2xl mx-auto lg:mx-0">
                         <input
                             type="email"
                             placeholder="your@email.com"
-                            className="flex-1 h-16 rounded-2xl bg-white/10 border border-white/10 px-6 font-bold text-white focus:outline-none focus:border-primary transition-colors"
+                            className="flex-1 h-[70px] min-h-[70px] rounded-2xl bg-white/10 border-2 border-white/20 px-8 font-black text-lg text-white placeholder:text-white/40 focus:outline-none focus:border-primary focus:bg-white/20 transition-all w-full text-center sm:text-left shadow-lg"
                         />
-                        <button className="h-16 px-10 rounded-2xl bg-primary text-white font-black text-lg shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+                        <button className="h-[70px] min-h-[70px] px-10 rounded-2xl bg-primary border-2 border-primary text-white font-black text-lg shadow-xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all w-full sm:w-auto shrink-0 flex items-center justify-center">
                             Subscribe Now
                         </button>
                     </form>

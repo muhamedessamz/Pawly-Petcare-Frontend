@@ -37,24 +37,24 @@ const Grooming = () => {
     return (
         <div className="max-w-7xl mx-auto px-4 py-20 space-y-32">
             {/* Hero Section */}
-            <section className="relative overflow-hidden rounded-[4rem] bg-gray-900 p-12 md:p-24 text-white">
-                <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
+            <section className="relative overflow-hidden rounded-[2.5rem] md:rounded-[4rem] bg-gray-900 p-8 md:p-24 text-white">
+                <div className="absolute top-0 right-0 w-full md:w-1/2 h-full opacity-30 md:opacity-20 pointer-events-none">
                     <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80&w=600" className="w-full h-full object-cover" />
                 </div>
 
-                <div className="relative z-10 max-w-2xl">
+                <div className="relative z-10 max-w-2xl flex flex-col items-center md:items-start text-center md:text-left mx-auto md:mx-0">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white text-xs font-black uppercase tracking-widest mb-8">
                         <Star size={14} className="text-playful" /> <span>5-Star Pet Spa</span>
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-black mb-8 leading-[1.1] tracking-tight">
+                    <h1 className="text-4xl md:text-7xl font-black mb-8 leading-[1.1] tracking-tight md:max-w-lg">
                         Look Good. <br />
                         <span className="text-primary">Feel Better.</span>
                     </h1>
-                    <p className="text-xl text-gray-400 font-medium mb-12 leading-relaxed">
+                    <p className="text-base md:text-lg text-gray-400 font-medium mb-12 leading-relaxed px-4 md:px-0 md:max-w-md">
                         Professional grooming services tailored to your pet's needs.
                         From a quick refresh to a luxury spa day, we handle it all with love.
                     </p>
-                    <Button size="lg" className="rounded-2xl px-10 py-8 text-xl shadow-xl shadow-primary/20">
+                    <Button size="lg" className="rounded-2xl px-10 py-6 md:py-8 text-lg md:text-xl shadow-xl shadow-primary/20 w-full sm:w-auto">
                         Book a Session
                     </Button>
                 </div>
@@ -62,22 +62,22 @@ const Grooming = () => {
 
             {/* Why Choose Us */}
             <section>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                    <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+                    <div className="space-y-6 flex flex-col items-center md:items-start">
                         <div className="h-16 w-16 bg-health/10 text-health rounded-2xl flex items-center justify-center">
                             <Heart size={32} />
                         </div>
                         <h3 className="text-2xl font-black">Certified Stylists</h3>
                         <p className="text-gray-500 font-medium">Our groomers are certified professionals who specialize in stress-free handling.</p>
                     </div>
-                    <div className="space-y-6">
+                    <div className="space-y-6 flex flex-col items-center md:items-start">
                         <div className="h-16 w-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center">
                             <Sparkles size={32} />
                         </div>
                         <h3 className="text-2xl font-black">Eco-Friendly</h3>
                         <p className="text-gray-500 font-medium">We use 100% natural, hypoallergenic shampoos and conditioners for ultimate skin health.</p>
                     </div>
-                    <div className="space-y-6">
+                    <div className="space-y-6 flex flex-col items-center md:items-start">
                         <div className="h-16 w-16 bg-playful/10 text-playful rounded-2xl flex items-center justify-center">
                             <Clock size={32} />
                         </div>
@@ -102,20 +102,20 @@ const Grooming = () => {
                                     <span className="bg-primary text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">Recommended</span>
                                 </div>
                             )}
-                            <CardContent className="p-8">
-                                <div className={`h-16 w-16 ${pkg.color} rounded-2xl flex items-center justify-center mb-8 shadow-lg`}>
+                            <CardContent className="p-8 flex flex-col items-center md:items-start text-center md:text-left">
+                                <div className={`h-16 w-16 ${pkg.color} rounded-2xl flex items-center justify-center mb-8 shadow-lg shrink-0`}>
                                     {React.cloneElement(pkg.icon, { size: 32 })}
                                 </div>
                                 <h3 className="text-2xl font-black mb-2">{pkg.name}</h3>
-                                <div className="flex items-baseline gap-2 mb-8">
+                                <div className="flex items-baseline justify-center md:justify-start gap-2 mb-8">
                                     <span className="text-4xl font-black">${pkg.price}</span>
                                     <span className="text-gray-400 font-bold">/session</span>
                                 </div>
 
-                                <ul className="space-y-4 mb-12">
+                                <ul className="space-y-4 mb-12 w-full">
                                     {pkg.features.map((feature, idx) => (
-                                        <li key={idx} className="flex items-center gap-3 font-bold text-gray-600">
-                                            <CheckCircle2 size={18} className="text-health" /> {feature}
+                                        <li key={idx} className="flex items-center justify-center md:justify-start gap-3 font-bold text-gray-600">
+                                            <CheckCircle2 size={18} className="text-health shrink-0" /> {feature}
                                         </li>
                                     ))}
                                 </ul>
@@ -125,7 +125,7 @@ const Grooming = () => {
                                 >
                                     Select Package
                                 </Button>
-                                <p className="text-center mt-6 text-xs text-gray-400 font-bold flex items-center justify-center gap-2">
+                                <p className="text-center md:text-left w-full mt-6 text-xs text-gray-400 font-bold flex items-center justify-center md:justify-start gap-2">
                                     <Clock size={12} /> Approx {pkg.duration}
                                 </p>
                             </CardContent>

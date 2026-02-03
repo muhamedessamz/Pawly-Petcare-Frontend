@@ -90,8 +90,8 @@ const Clinic = () => {
 
             <div className="max-w-7xl mx-auto px-4">
                 <div className="flex flex-col lg:flex-row gap-12">
-                    {/* Filters Sidebar */}
-                    <aside className="lg:w-72 space-y-8 flex-shrink-0">
+                    {/* Filters Sidebar - Hidden on mobile */}
+                    <aside className="hidden lg:block lg:w-72 space-y-8 flex-shrink-0">
                         <div className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm sticky top-24">
                             <div className="flex items-center gap-2 font-black text-gray-900 mb-8 uppercase tracking-tighter text-lg">
                                 <Filter size={20} className="text-health" /> Specialized Care

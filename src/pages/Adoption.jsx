@@ -55,35 +55,37 @@ const Adoption = () => {
             {/* Header */}
             <header className="mb-16 text-center max-w-3xl mx-auto">
                 <Badge variant="playful" className="mb-6 uppercase tracking-widest px-4 py-1.5 bg-primary/10 text-primary border-none">Find Your Soulmate</Badge>
-                <h1 className="text-5xl md:text-7xl font-black text-gray-900 mb-6 tracking-tight leading-[1.1]">
+                <h1 className="text-4xl md:text-7xl font-black text-gray-900 mb-6 tracking-tight leading-[1.1]">
                     Adoption Center
                 </h1>
-                <p className="text-xl text-gray-500 font-medium leading-relaxed italic mb-10">
+                <p className="text-lg md:text-xl text-gray-500 font-medium leading-relaxed italic mb-10 px-4 md:px-0">
                     "Every pet deserves a loving home, and every home deserves a loving pet."
                 </p>
                 <Link to="/adoption/offer">
-                    <Button size="lg" className="rounded-2xl px-12 py-6 text-lg font-black shadow-xl shadow-primary/20 hover:scale-105 transition-transform">
-                        List Your Pet for Adoption <ArrowRight size={22} className="ml-2" />
+                    <Button size="lg" className="rounded-2xl px-8 py-4 md:px-12 md:py-6 text-base md:text-lg font-black shadow-xl shadow-primary/20 hover:scale-105 transition-transform">
+                        List Your Pet for Adoption <ArrowRight size={20} className="ml-2 md:w-[22px] md:h-[22px]" />
                     </Button>
                 </Link>
             </header>
 
             {/* Filters */}
-            <div className="mb-12 flex flex-col md:flex-row gap-6 items-center justify-between sticky top-24 z-30 bg-white/80 backdrop-blur-md p-4 rounded-3xl border border-gray-100 shadow-sm">
-                <div className="flex bg-gray-100 p-1.5 rounded-2xl w-full md:w-auto">
+            <div className="mb-12 flex flex-col md:flex-row gap-6 items-center justify-between">
+                <div className="grid grid-cols-2 sm:flex bg-gray-100 p-1.5 rounded-2xl w-full md:w-auto gap-2 sm:gap-0">
                     {['All', 'Dog', 'Cat', 'Other'].map((species) => (
                         <button
                             key={species}
                             onClick={() => setSelectedSpecies(species)}
-                            className={`flex-1 md:flex-none px-8 py-3 rounded-xl font-black transition-all ${selectedSpecies === species
+                            className={`px-4 py-3 sm:px-8 rounded-xl font-black transition-all text-sm sm:text-base ${selectedSpecies === species
                                 ? 'bg-white text-gray-900 shadow-lg'
                                 : 'text-gray-500 hover:text-gray-700'
                                 }`}
                         >
-                            {species === 'All' && <span className="flex items-center gap-2">All Pets</span>}
-                            {species === 'Dog' && <span className="flex items-center gap-2"><Dog size={18} /> Dogs</span>}
-                            {species === 'Cat' && <span className="flex items-center gap-2"><Cat size={18} /> Cats</span>}
-                            {species === 'Other' && <span className="flex items-center gap-2"><Filter size={18} /> Other</span>}
+                            <span className="flex items-center justify-center gap-2">
+                                {species === 'All' && 'All Pets'}
+                                {species === 'Dog' && <><Dog size={16} className="sm:w-[18px] sm:h-[18px]" /> Dogs</>}
+                                {species === 'Cat' && <><Cat size={16} className="sm:w-[18px] sm:h-[18px]" /> Cats</>}
+                                {species === 'Other' && <><Filter size={16} className="sm:w-[18px] sm:h-[18px]" /> Other</>}
+                            </span>
                         </button>
                     ))}
                 </div>
@@ -93,7 +95,7 @@ const Adoption = () => {
                     <input
                         type="text"
                         placeholder="Search by name or breed..."
-                        className="w-full pl-12 pr-4 py-4 rounded-2xl border-gray-100 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-primary/20 transition-all outline-none font-bold"
+                        className="w-full pl-12 pr-4 py-3 md:py-4 rounded-2xl border-gray-100 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-primary/20 transition-all outline-none font-bold"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -133,7 +135,6 @@ const Adoption = () => {
 
                                     {/* Overlay Info */}
                                     <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/80 via-black/20 to-transparent text-white translate-y-4 group-hover:translate-y-0 transition-transform">
-                                        <p className="text-xs font-black uppercase tracking-[0.2em] mb-2 text-primary">Needs a Home</p>
                                         <h3 className="text-3xl font-black mb-1">{pet.name}</h3>
                                         <p className="font-bold text-gray-300 italic">{pet.breed} • {pet.age} Years</p>
                                     </div>
@@ -163,19 +164,21 @@ const Adoption = () => {
             )}
 
             {/* Newsletter CTA */}
-            <section className="mt-32 bg-gray-900 rounded-[4rem] p-12 md:p-24 text-white relative overflow-hidden text-center md:text-left">
-                <div className="absolute bottom-0 right-0 w-1/2 h-full opacity-10 pointer-events-none grayscale">
+            <section className="mt-32 bg-gray-900 rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-24 text-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-full md:w-1/2 h-full opacity-20 md:opacity-10 pointer-events-none grayscale">
                     <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover" />
                 </div>
                 <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight leading-tight">Can't adopt right now? <br /> You can still help.</h2>
-                        <p className="text-xl text-gray-400 font-medium leading-relaxed mb-10">
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left mx-auto md:mx-0">
+                        <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight leading-tight md:max-w-xl">
+                            Can't adopt right now? <br /> You can still help.
+                        </h2>
+                        <p className="text-lg md:text-xl text-gray-400 font-medium leading-relaxed mb-10 md:max-w-md">
                             Join our volunteer network or donate to help provide food and medical care for our rescue pets.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4">
-                            <Link to="/adoption/volunteer">
-                                <Button size="lg" className="rounded-2xl px-10 font-black w-full sm:w-auto">Become Volunteer</Button>
+                        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                            <Link to="/adoption/volunteer" className="w-full sm:w-auto">
+                                <Button size="lg" className="rounded-2xl px-10 font-black w-full">Become Volunteer</Button>
                             </Link>
                             <Button variant="outline" size="lg" className="rounded-2xl px-10 border-white/10 text-white hover:bg-white/10 w-full sm:w-auto">Make a Donation</Button>
                         </div>
