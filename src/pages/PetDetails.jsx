@@ -4,7 +4,7 @@ import { api } from '../services/api';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import { Card } from '../components/ui/Card';
-import { ArrowLeft, Heart, Share2, ClipboardCheck, Info, MapPin, Bone, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Heart, Share2, ClipboardCheck, Info, MapPin, Bone, CheckCircle2, User, Phone, Mail } from 'lucide-react';
 
 const PetDetails = () => {
     const { id } = useParams();
@@ -114,14 +114,34 @@ const PetDetails = () => {
                     </div>
 
                     <div className="mt-auto pt-10 border-t border-gray-100">
-                        <Link to={`/adopt/${pet.id}`}>
-                            <Button size="lg" className="w-full h-24 rounded-[1.8rem] text-2xl font-black flex items-center justify-center gap-4 shadow-2xl shadow-primary/30 group">
-                                Start Adoption Process <ArrowLeft size={24} className="rotate-180 group-hover:translate-x-2 transition-transform" />
-                            </Button>
-                        </Link>
-                        <p className="mt-6 text-center text-sm font-bold text-gray-400 flex items-center justify-center gap-2">
-                            <ClipboardCheck size={18} /> Full medical clearance provided
-                        </p>
+                        <div className="bg-primary/5 p-6 rounded-[2rem] border border-primary/10">
+                            <h3 className="font-black text-lg text-gray-900 mb-4 flex items-center gap-2">
+                                <User className="text-primary" size={20} /> Contact Owner Directly
+                            </h3>
+                            <div className="space-y-4">
+                                <div className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm">
+                                    <div className="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center shrink-0">
+                                        <Phone size={18} className="text-gray-600" />
+                                    </div>
+                                    <div>
+                                        <p className="text-xs font-bold text-gray-400 uppercase">Phone Number</p>
+                                        <p className="font-black text-gray-900">{pet.ownerPhone || 'Not Available'}</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm">
+                                    <div className="h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center shrink-0">
+                                        <Mail size={18} className="text-gray-600" />
+                                    </div>
+                                    <div className="overflow-hidden">
+                                        <p className="text-xs font-bold text-gray-400 uppercase">Email Address</p>
+                                        <p className="font-black text-gray-900 truncate" title={pet.ownerEmail}>{pet.ownerEmail || 'Not Available'}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p className="mt-4 text-xs font-bold text-gray-400 text-center">
+                                Please mention "Pawly" when contacting the owner.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -57,8 +57,9 @@ const OfferPet = () => {
                 age: parseInt(formData.age) || 0, // Ensure age is number if backend expects it
                 ownerEmail: user?.email || formData.ownerEmail, // Force user email if logged in
             };
-
+            console.log('Submitting Pet Data:', petData); // Debug log
             await api.pets.create(petData);
+            window.scrollTo(0, 0); // Scroll to top before showing success message
             setSubmitted(true);
         } catch (error) {
             console.error("Failed to submit pet", error);
@@ -199,7 +200,21 @@ const OfferPet = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Email</label>
-                                <Input type="email" name="ownerEmail" required value={formData.ownerEmail} onChange={handleInput} placeholder="your@email.com" className="h-14 rounded-2xl" />
+                                <div className="relative">
+                                    <Input
+                                        type="email"
+                                        name="ownerEmail"
+                                        required
+                                        value={formData.ownerEmail}
+                                        onChange={handleInput}
+                                        placeholder="your@email.com"
+                                        className="h-14 rounded-2xl bg-gray-100 text-gray-500 cursor-not-allowed"
+                                        disabled
+                                    />
+                                    <p className="text-xs text-primary font-bold mt-1 ml-1">
+                                        Linked to your account: {user?.email}
+                                    </p>
+                                </div>
                             </div>
                             <div className="space-y-2">
                                 <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Phone Number</label>

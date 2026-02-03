@@ -14,13 +14,13 @@ export const AuthProvider = ({ children }) => {
         if (!userData) return null;
         return {
             ...userData,
-            email: userData.email || userData.Email,
-            name: userData.name || userData.Name,
-            username: userData.username || userData.Username,
-            profilePictureUrl: userData.profilePictureUrl || userData.ProfilePictureUrl,
-            phoneNumber: userData.phoneNumber || userData.PhoneNumber,
-            role: userData.role || userData.Role,
-            token: userData.token || userData.Token
+            email: userData.email || userData.Email || '',
+            name: userData.name || userData.Name || '',
+            username: userData.username || userData.Username || '',
+            profilePictureUrl: userData.profilePictureUrl || userData.ProfilePictureUrl || '',
+            phoneNumber: userData.phoneNumber || userData.PhoneNumber || '',
+            role: userData.role || userData.Role || '',
+            token: userData.token || userData.Token || ''
         };
     };
 

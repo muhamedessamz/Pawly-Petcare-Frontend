@@ -50,12 +50,14 @@ const Profile = () => {
                     setPreviewUrl(`http://pawly-petcare.runasp.net${user.profilePictureUrl}`);
                 }
 
+                console.log('Fetching profile data for:', user.email);
                 const [appointmentsData, ordersData, petsData, volunteersData] = await Promise.all([
                     api.appointments.getMy(user.email),
                     api.orders.getMy(user.email),
                     api.pets.getMy(user.email),
                     api.volunteers.getMy(user.email)
                 ]);
+                console.log('My Pets Data:', petsData);
                 setAppointments(appointmentsData);
                 setOrders(ordersData);
                 setMyPets(petsData);
