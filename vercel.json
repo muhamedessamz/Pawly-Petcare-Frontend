@@ -1,6 +1,10 @@
 {
     "rewrites": [
         {
+            "source": "/api/(.*)",
+            "destination": "http://pawly-petcare.runasp.net/api/$1"
+        },
+        {
             "source": "/(.*)",
             "destination": "/index.html"
         }
