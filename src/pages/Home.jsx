@@ -225,7 +225,7 @@ const Home = () => {
             </section>
 
             {/* Premium Accessories CTA */}
-            <section className="px-4 py-4">
+            <section className="px-4 pt-4 pb-0">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col lg:flex-row gap-6 items-stretch">
                         {/* Text Card */}
@@ -288,7 +288,7 @@ const Home = () => {
             </section>
 
             {/* Testimonials */}
-            <section className="px-4 py-2 bg-white">
+            <section className="px-4 pt-0 pb-20 bg-white">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col lg:flex-row gap-6 items-stretch">
                         {/* Testimonial Card */}
@@ -367,7 +367,7 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+                <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 lg:gap-20 mt-24">
                     <div className="w-full md:w-1/3 relative flex justify-center md:block">
                         <div className="aspect-[3/4] w-full max-w-[320px] rounded-[3rem] overflow-hidden shadow-2xl shadow-health/20 md:rotate-3 border-4 border-white transition-transform duration-500 hover:rotate-0">
                             <img
