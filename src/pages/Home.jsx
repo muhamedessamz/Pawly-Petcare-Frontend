@@ -89,8 +89,11 @@ const Home = () => {
                         <div className="relative z-10 w-full h-full transform transition-all duration-700 rotate-3 hover:rotate-0 hover:scale-105 rounded-[3.5rem] overflow-hidden shadow-2xl shadow-primary/10">
                             <img
                                 src="https://www.mrmochaspet.com/cdn/shop/files/Screen_Shot_2024-02-28_at_7.27.25_PM.png?v=1709166485&width=1020"
-                                alt="Pawly Pet"
+                                alt="Happy dog with owner using Pawly app"
+                                width="1020"
+                                height="1020"
                                 className="w-full h-full object-cover"
+                                loading="eager"
                             />
                         </div>
                         <div className="absolute top-4 right-4 sm:-top-6 sm:-right-6 bg-white p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-xl z-20 animate-pulse border border-gray-100 flex items-center gap-3">
@@ -140,7 +143,10 @@ const Home = () => {
                                 <img
                                     src="https://images.unsplash.com/photo-1599443015574-be5fe8a05783?auto=format&fit=crop&q=80&w=600"
                                     className="w-full h-full object-cover"
-                                    alt="Health Clinic"
+                                    alt="Veterinarian examining a dog in the clinic"
+                                    width="600"
+                                    height="400"
+                                    loading="lazy"
                                 />
                             </div>
                         </div>
@@ -261,7 +267,11 @@ const Home = () => {
                         <div className="lg:w-[35%] h-[380px] lg:h-auto rounded-[2rem] overflow-hidden group relative border border-white/5">
                             <img
                                 src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=800"
+                                alt="Dog wearing premium luxury collar"
+                                width="800"
+                                height="600"
                                 className="w-full h-full object-cover object-bottom transition-transform duration-1000 group-hover:scale-110"
+                                loading="lazy"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent"></div>
 
@@ -297,81 +307,83 @@ const Home = () => {
                                 </p>
                                 <div className="flex items-center gap-4">
                                     <div className="h-14 w-14 rounded-full overflow-hidden border-2 border-white/20 p-0.5 relative">
-                                        <img src="https://i.pravatar.cc/150?u=4" alt="Happy Customer" className="w-full h-full rounded-full object-cover" />
+                                        <img src="https://i.pravatar.cc/150?u=4" alt="Alex Rivera - Happy Customer" width="150" height="150" className="w-full h-full rounded-full object-cover" loading="lazy" />
                                         <div className="absolute -bottom-1 -right-1 bg-primary rounded-full p-1 border-2 border-gray-900">
                                             <CheckCircle2 size={10} className="text-white" />
                                         </div>
                                     </div>
-                                    <div>
-                                        <div className="flex items-center gap-2">
-                                            <p className="text-white font-bold text-base">Alex Rivera</p>
-                                            <Badge className="bg-white/5 text-[10px] py-0 px-2 h-4 border-white/10 text-gray-400">Verified Buyer</Badge>
-                                        </div>
-                                        <p className="text-gray-500 font-medium text-sm">Golden Retriever Mom</p>
-                                    </div>
                                 </div>
                             </div>
-                            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-playful/10 rounded-full blur-[80px]"></div>
+                            <div>
+                                <div className="flex items-center gap-2">
+                                    <p className="text-white font-bold text-base">Alex Rivera</p>
+                                    <Badge className="bg-white/5 text-[10px] py-0 px-2 h-4 border-white/10 text-gray-400">Verified Buyer</Badge>
+                                </div>
+                                <p className="text-gray-500 font-medium text-sm">Golden Retriever Mom</p>
+                            </div>
                         </div>
+                    </div>
+                    <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-playful/10 rounded-full blur-[80px]"></div>
+                </div>
 
-                        {/* Stats Card */}
-                        <div className="lg:w-[35%] rounded-[2rem] overflow-hidden relative p-8 flex items-center justify-center bg-gray-900 group border border-white/5">
-                            <div className="absolute inset-0 z-0 opacity-20">
-                                <img
-                                    src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=600"
-                                    className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110"
-                                />
-                                <div className="absolute inset-0 bg-gray-900/60"></div>
+                {/* Stats Card */}
+                <div className="lg:w-[35%] rounded-[2rem] overflow-hidden relative p-8 flex items-center justify-center bg-gray-900 group border border-white/5">
+                    <div className="absolute inset-0 z-0 opacity-20">
+                        <img
+                            src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=600"
+                            alt="Happy dog background"
+                            width="600"
+                            height="400"
+                            className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110"
+                            loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gray-900/60"></div>
+                    </div>
+                    <div className="relative z-10 w-full space-y-4">
+                        <div className="grid grid-cols-2 gap-3">
+                            <div className="bg-white/5 backdrop-blur-xl p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300">
+                                <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-3">
+                                    <Users size={16} />
+                                </div>
+                                <p className="text-3xl font-black text-white mb-0.5">50k+</p>
+                                <p className="text-gray-500 font-bold uppercase text-[9px] tracking-widest">Active Pets</p>
                             </div>
-                            <div className="relative z-10 w-full space-y-4">
-                                <div className="grid grid-cols-2 gap-3">
-                                    <div className="bg-white/5 backdrop-blur-xl p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300">
-                                        <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-3">
-                                            <Users size={16} />
-                                        </div>
-                                        <p className="text-3xl font-black text-white mb-0.5">50k+</p>
-                                        <p className="text-gray-500 font-bold uppercase text-[9px] tracking-widest">Active Pets</p>
-                                    </div>
-                                    <div className="bg-white/5 backdrop-blur-xl p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300 mt-6">
-                                        <div className="h-8 w-8 rounded-full bg-playful/20 flex items-center justify-center text-playful mb-3">
-                                            <Heart size={16} />
-                                        </div>
-                                        <p className="text-3xl font-black text-white mb-0.5">100%</p>
-                                        <p className="text-gray-500 font-bold uppercase text-[9px] tracking-widest">Happiness</p>
-                                    </div>
+                            <div className="bg-white/5 backdrop-blur-xl p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300 mt-6">
+                                <div className="h-8 w-8 rounded-full bg-playful/20 flex items-center justify-center text-playful mb-3">
+                                    <Heart size={16} />
                                 </div>
-                                <div className="bg-white/5 backdrop-blur-xl p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300 w-full flex items-center gap-5">
-                                    <div className="h-10 w-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
-                                        <Shield size={20} />
-                                    </div>
-                                    <div>
-                                        <p className="text-2xl font-black text-white">24/7 Safety</p>
-                                        <p className="text-gray-500 font-bold uppercase text-[9px] tracking-widest">Expert Support Guaranteed</p>
-                                    </div>
-                                </div>
+                                <p className="text-3xl font-black text-white mb-0.5">100%</p>
+                                <p className="text-gray-500 font-bold uppercase text-[9px] tracking-widest">Happiness</p>
+                            </div>
+                        </div>
+                        <div className="bg-white/5 backdrop-blur-xl p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300 w-full flex items-center gap-5">
+                            <div className="h-10 w-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                                <Shield size={20} />
+                            </div>
+                            <div>
+                                <p className="text-2xl font-black text-white">24/7 Safety</p>
+                                <p className="text-gray-500 font-bold uppercase text-[9px] tracking-widest">Expert Support Guaranteed</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            {/* Founder Note Section */}
-            <section className="px-4 py-20 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-full bg-health/5 skew-y-3 transform origin-top-left -z-10 bg-opacity-30"></div>
                 <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 lg:gap-20">
                     <div className="w-full md:w-1/3 relative flex justify-center md:block">
                         <div className="aspect-[3/4] w-full max-w-[320px] rounded-[3rem] overflow-hidden shadow-2xl shadow-health/20 md:rotate-3 border-4 border-white transition-transform duration-500 hover:rotate-0">
                             <img
                                 src="https://img.freepik.com/free-photo/close-up-health-worker_23-2149112506.jpg?t=st=1769968108~exp=1769971708~hmac=776163d86f26ae815d19154eb6dbe230a0e53b173b9720bffdc9e4a243b970a1"
                                 alt="Dr. Richard Hamilton"
+                                width="600"
+                                height="800"
                                 className="w-full h-full object-cover object-top"
+                                loading="lazy"
                             />
                         </div>
                         <div className="absolute -bottom-6 right-1/2 translate-x-1/2 md:translate-x-0 md:-right-6 bg-white p-6 rounded-3xl shadow-xl flex flex-col items-center border border-gray-100 animate-bounce-slow z-10">
                             <div className="text-3xl font-black text-health mb-1">20+</div>
                             <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">Years Exp.</div>
                         </div>
-                    </div>
+                    </div >
 
                     <div className="w-full md:w-2/3 flex flex-col items-center md:items-start text-center md:text-left">
                         <Badge variant="playful" className="bg-health text-white border-none mb-6">Meet the Founder</Badge>
@@ -401,11 +413,11 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div >
             </section >
 
             {/* Learning Center (Blog Preview) */}
-            <section className="px-4 pt-10 pb-20 lg:py-20 bg-gray-50/50">
+            < section className="px-4 pt-10 pb-20 lg:py-20 bg-gray-50/50" >
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-6">
                         <div className="text-center md:text-left">
@@ -428,7 +440,14 @@ const Home = () => {
                             latestArticles.map((article) => (
                                 <Card key={article.id} className="rounded-[2.5rem] border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 group flex flex-col h-full bg-white">
                                     <div className="aspect-video relative overflow-hidden">
-                                        <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                        <img
+                                            src={article.image}
+                                            alt={article.title}
+                                            width="600"
+                                            height="400"
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                            loading="lazy"
+                                        />
                                         <div className="absolute top-4 left-4">
                                             {/* This badge is for blog articles, not doctor availability */}
                                             <Badge variant="playful" className="bg-white/90 backdrop-blur-sm border-none shadow-sm">{article.category}</Badge>
@@ -443,7 +462,7 @@ const Home = () => {
                                             {article.excerpt}
                                         </p>
                                         <Link to={`/blog/${article.id}`} className="mt-auto inline-flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest hover:gap-4 transition-all" aria-label={`Read more about ${article.title}`}>
-                                            Read More <ArrowRight size={16} />
+                                            Read More <span className="sr-only"> about {article.title}</span> <ArrowRight size={16} />
                                         </Link>
                                     </div>
                                 </Card>
@@ -454,7 +473,7 @@ const Home = () => {
             </section >
 
             {/* Final Meet Doctors CTA */}
-            <section className="px-4 max-w-7xl mx-auto pt-6 md:pt-12 pb-12">
+            < section className="px-4 max-w-7xl mx-auto pt-6 md:pt-12 pb-12" >
                 <div className="flex flex-col md:flex-row justify-center md:justify-between items-center mb-12 gap-6 text-center md:text-left">
                     <h2 className="text-4xl font-black text-gray-900 tracking-tight">Top Veterinary Specialists</h2>
                     <Link to="/clinic">
@@ -482,7 +501,7 @@ const Home = () => {
             </section >
 
             {/* Newsletter / Join */}
-            <section className="px-4 py-8 bg-gray-50">
+            < section className="px-4 py-8 bg-gray-50" >
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-black mb-6">Stay ahead on pet wellness.</h2>
                     <p className="text-gray-500 text-lg mb-10 font-medium">Join 20k+ pet owners who receive our weekly nutrition tips and clinic updates.</p>

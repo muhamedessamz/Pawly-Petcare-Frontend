@@ -29,8 +29,11 @@ const DoctorCard = ({ doctor }) => {
                             <img
                                 src={doctor.image}
                                 alt={doctor.name}
+                                width="150"
+                                height="150"
                                 className="object-cover object-top w-full h-full"
                                 style={doctor.imageStyles}
+                                loading="lazy"
                             />
                         </div>
                         <div className="absolute -bottom-2 -right-2 bg-health text-white p-2 rounded-xl shadow-lg ring-4 ring-white z-20">

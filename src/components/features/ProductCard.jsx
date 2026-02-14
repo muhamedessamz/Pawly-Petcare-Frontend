@@ -15,7 +15,10 @@ const ProductCard = ({ product }) => {
                 <img
                     src={getImageUrl(product.image)}
                     alt={product.name}
+                    width="400"
+                    height="500"
                     className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"
+                    loading="lazy"
                 />
                 <div className="absolute top-4 left-4 flex gap-2">
                     <Badge variant="playful" className="bg-white/90 backdrop-blur-sm border-none shadow-sm">{product.category}</Badge>
