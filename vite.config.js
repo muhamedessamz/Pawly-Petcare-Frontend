@@ -21,5 +21,19 @@ export default defineConfig({
         secure: false,
       }
     }
+  },
+  preview: {
+    proxy: {
+      '/api': {
+        target: 'http://pawly-petcare.runasp.net',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/uploads': {
+        target: 'http://pawly-petcare.runasp.net',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
   }
 })
