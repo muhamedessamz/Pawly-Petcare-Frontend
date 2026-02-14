@@ -58,7 +58,7 @@ const Navbar = () => {
 
                     <div className="hidden md:flex items-center gap-6">
                         <Link to="/cart">
-                            <Button variant="ghost" className="relative group h-9 w-9 p-0 rounded-xl flex items-center justify-center">
+                            <Button variant="ghost" className="relative group h-9 w-9 p-0 rounded-xl flex items-center justify-center" aria-label={`Cart (${cartCount} items)`}>
                                 <ShoppingCart size={20} className="group-hover:text-primary transition-colors" />
                                 {cartCount > 0 && (
                                     <span className="absolute -top-1 -right-1 h-5 w-5 bg-playful text-white text-[10px] font-black rounded-full flex items-center justify-center ring-2 ring-white">
@@ -89,10 +89,11 @@ const Navbar = () => {
                         )}
                     </div>
 
-                    <div className="flex lg:hidden">
+                    <div className="flex md:hidden">
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-colors"
+                            aria-label="Toggle menu"
                         >
                             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>

@@ -6,8 +6,8 @@ export const getImageUrl = (imagePath) => {
   if (!imagePath) return null;
   // If it's already a full URL, return as is
   if (imagePath.startsWith('http')) return imagePath;
-  // Otherwise, prepend server URL
-  return SERVER_URL + imagePath;
+  // Use relative path for Vercel/Vite proxy to avoid Mixed Content
+  return imagePath;
 };
 
 const handleResponse = async (response) => {

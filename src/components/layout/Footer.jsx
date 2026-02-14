@@ -22,8 +22,12 @@ const Footer = () => {
                             World-class care for your best friend. Join a community of happy pets and their owners.
                         </p>
                         <div className="flex gap-4">
-                            {[Facebook, Instagram, Twitter].map((Icon, i) => (
-                                <button key={i} className="h-12 w-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary transition-all hover:text-white group">
+                            {[
+                                { Icon: Facebook, label: 'Facebook' },
+                                { Icon: Instagram, label: 'Instagram' },
+                                { Icon: Twitter, label: 'Twitter' }
+                            ].map(({ Icon, label }, i) => (
+                                <button key={i} aria-label={label} className="h-12 w-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary transition-all hover:text-white group">
                                     <Icon size={20} />
                                 </button>
                             ))}

@@ -13,6 +13,12 @@ export default defineConfig({
       '/api': {
         target: 'http://pawly-petcare.runasp.net',
         changeOrigin: true,
+        secure: false,
+      },
+      '/uploads': {
+        target: 'http://pawly-petcare.runasp.net',
+        changeOrigin: true,
+        secure: false,
       }
     }
   }

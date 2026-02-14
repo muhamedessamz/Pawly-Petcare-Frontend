@@ -490,6 +490,7 @@ const Home = () => {
                         <input
                             type="email"
                             placeholder="Enter your email"
+                            aria-label="Email address for newsletter"
                             className="flex-1 px-6 py-4 rounded-2xl border border-white shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                         />
                         <Button className="py-4 shadow-xl shadow-primary/20">Subscribe</Button>

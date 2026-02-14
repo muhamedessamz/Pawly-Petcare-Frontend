@@ -5,6 +5,10 @@
             "destination": "http://pawly-petcare.runasp.net/api/$1"
         },
         {
+            "source": "/uploads/(.*)",
+            "destination": "http://pawly-petcare.runasp.net/uploads/$1"
+        },
+        {
             "source": "/(.*)",
             "destination": "/index.html"
         }
