@@ -59,8 +59,8 @@ const DoctorCard = ({ doctor }) => {
                 </div>
 
                 {/* Footer: Action Button */}
-                <Link to={`/book-appointment/${doctor.id}`} className="mt-auto block">
-                    <Button variant="primary" className="w-full h-14 bg-health hover:bg-blue-700 border-none shadow-xl shadow-health/20 rounded-[1.25rem] group/btn overflow-hidden relative">
+                <Link to={`/book-appointment/${doctor.id}`} className="mt-auto block" aria-label={`Book appointment with ${doctor.name}`}>
+                    <Button variant="primary" className="w-full h-14 bg-health hover:bg-blue-700 border-none shadow-xl shadow-health/20 rounded-[1.25rem] group/btn overflow-hidden relative" tabIndex="-1">
                         <span className="relative z-10 font-bold uppercase tracking-widest text-[11px] flex items-center justify-center gap-2">
                             Book Online Now <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
                         </span>

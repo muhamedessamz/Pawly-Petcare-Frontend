@@ -442,7 +442,7 @@ const Home = () => {
                                         <p className="text-gray-500 font-medium mb-8 line-clamp-2">
                                             {article.excerpt}
                                         </p>
-                                        <Link to={`/blog/${article.id}`} className="mt-auto inline-flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest hover:gap-4 transition-all">
+                                        <Link to={`/blog/${article.id}`} className="mt-auto inline-flex items-center gap-2 text-primary font-black uppercase text-xs tracking-widest hover:gap-4 transition-all" aria-label={`Read more about ${article.title}`}>
                                             Read More <ArrowRight size={16} />
                                         </Link>
                                     </div>

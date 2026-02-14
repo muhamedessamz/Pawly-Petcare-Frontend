@@ -54,8 +54,8 @@ const ProductCard = ({ product }) => {
                         <span className="text-sm font-bold align-top mt-1 inline-block">$ </span>
                         {product.price.toFixed(2)}
                     </span>
-                    <Link to={`/products/${product.id}`}>
-                        <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/5 rounded-lg px-2 group/btn">
+                    <Link to={`/products/${product.id}`} aria-label={`View details for ${product.name}`}>
+                        <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/5 rounded-lg px-2 group/btn" tabIndex="-1">
                             Details <ArrowRight size={16} className="ml-1 group-hover/btn:translate-x-1 transition-transform" />
                         </Button>
                     </Link>
