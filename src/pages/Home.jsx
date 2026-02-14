@@ -322,51 +322,51 @@ const Home = () => {
                                 <p className="text-gray-500 font-medium text-sm">Golden Retriever Mom</p>
                             </div>
                         </div>
+                        {/* Stats Card */}
+                        <div className="lg:w-[35%] rounded-[2rem] overflow-hidden relative p-8 flex items-center justify-center bg-gray-900 group border border-white/5">
+                            <div className="absolute inset-0 z-0 opacity-20">
+                                <img
+                                    src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=600"
+                                    alt="Happy dog background"
+                                    width="600"
+                                    height="400"
+                                    className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110"
+                                    loading="lazy"
+                                />
+                                <div className="absolute inset-0 bg-gray-900/60"></div>
+                            </div>
+                            <div className="relative z-10 w-full space-y-4">
+                                <div className="grid grid-cols-2 gap-3">
+                                    <div className="bg-white/5 backdrop-blur-xl p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300">
+                                        <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-3">
+                                            <Users size={16} />
+                                        </div>
+                                        <p className="text-3xl font-black text-white mb-0.5">50k+</p>
+                                        <p className="text-gray-500 font-bold uppercase text-[9px] tracking-widest">Active Pets</p>
+                                    </div>
+                                    <div className="bg-white/5 backdrop-blur-xl p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300 mt-6">
+                                        <div className="h-8 w-8 rounded-full bg-playful/20 flex items-center justify-center text-playful mb-3">
+                                            <Heart size={16} />
+                                        </div>
+                                        <p className="text-3xl font-black text-white mb-0.5">100%</p>
+                                        <p className="text-gray-500 font-bold uppercase text-[9px] tracking-widest">Happiness</p>
+                                    </div>
+                                </div>
+                                <div className="bg-white/5 backdrop-blur-xl p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300 w-full flex items-center gap-5">
+                                    <div className="h-10 w-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                                        <Shield size={20} />
+                                    </div>
+                                    <div>
+                                        <p className="text-2xl font-black text-white">24/7 Safety</p>
+                                        <p className="text-gray-500 font-bold uppercase text-[9px] tracking-widest">Expert Support Guaranteed</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-playful/10 rounded-full blur-[80px]"></div>
                     </div>
-                    <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-playful/10 rounded-full blur-[80px]"></div>
                 </div>
 
-                {/* Stats Card */}
-                <div className="lg:w-[35%] rounded-[2rem] overflow-hidden relative p-8 flex items-center justify-center bg-gray-900 group border border-white/5">
-                    <div className="absolute inset-0 z-0 opacity-20">
-                        <img
-                            src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=600"
-                            alt="Happy dog background"
-                            width="600"
-                            height="400"
-                            className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110"
-                            loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-gray-900/60"></div>
-                    </div>
-                    <div className="relative z-10 w-full space-y-4">
-                        <div className="grid grid-cols-2 gap-3">
-                            <div className="bg-white/5 backdrop-blur-xl p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300">
-                                <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-3">
-                                    <Users size={16} />
-                                </div>
-                                <p className="text-3xl font-black text-white mb-0.5">50k+</p>
-                                <p className="text-gray-500 font-bold uppercase text-[9px] tracking-widest">Active Pets</p>
-                            </div>
-                            <div className="bg-white/5 backdrop-blur-xl p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300 mt-6">
-                                <div className="h-8 w-8 rounded-full bg-playful/20 flex items-center justify-center text-playful mb-3">
-                                    <Heart size={16} />
-                                </div>
-                                <p className="text-3xl font-black text-white mb-0.5">100%</p>
-                                <p className="text-gray-500 font-bold uppercase text-[9px] tracking-widest">Happiness</p>
-                            </div>
-                        </div>
-                        <div className="bg-white/5 backdrop-blur-xl p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300 w-full flex items-center gap-5">
-                            <div className="h-10 w-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
-                                <Shield size={20} />
-                            </div>
-                            <div>
-                                <p className="text-2xl font-black text-white">24/7 Safety</p>
-                                <p className="text-gray-500 font-bold uppercase text-[9px] tracking-widest">Expert Support Guaranteed</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 lg:gap-20">
                     <div className="w-full md:w-1/3 relative flex justify-center md:block">
                         <div className="aspect-[3/4] w-full max-w-[320px] rounded-[3rem] overflow-hidden shadow-2xl shadow-health/20 md:rotate-3 border-4 border-white transition-transform duration-500 hover:rotate-0">
