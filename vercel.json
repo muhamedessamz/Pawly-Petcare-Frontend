@@ -40,6 +40,10 @@
   ],
   "rewrites": [
     {
+      "source": "/api/:path*",
+      "destination": "http://pawly-petcare.runasp.net/api/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
