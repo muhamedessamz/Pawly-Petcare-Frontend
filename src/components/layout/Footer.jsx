@@ -70,7 +70,7 @@ const Footer = () => {
                     </div>
 
                     <div className="bg-white/5 p-8 rounded-[3rem] border border-white/10">
-                        <h4 className="text-white font-black text-lg mb-8 uppercase tracking-widest text-xs">Reach Us</h4>
+                        <h3 className="text-white font-black text-lg mb-8 uppercase tracking-widest text-xs">Reach Us</h3>
                         <ul className="space-y-6">
                             <li className="flex items-start gap-4">
                                 <MapPin className="text-primary shrink-0" size={20} />

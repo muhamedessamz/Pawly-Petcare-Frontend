@@ -1,16 +1,35 @@
 {
-    "rewrites": [
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
         {
-            "source": "/api/(.*)",
-            "destination": "http://pawly-petcare.runasp.net/api/$1"
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
         },
         {
-            "source": "/uploads/(.*)",
-            "destination": "http://pawly-petcare.runasp.net/uploads/$1"
+          "key": "X-Frame-Options",
+          "value": "DENY"
         },
         {
-            "source": "/(.*)",
-            "destination": "/index.html"
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; frame-src 'self'; connect-src 'self' https://apis.google.com;"
         }
-    ]
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
